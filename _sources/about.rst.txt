@@ -4,5 +4,7 @@
 About Pashmina Cameron
 ============================
 
-The world wants to know more about you.
+I am a Senior Research Software Engineer in Machine Intelligence and Perception lab in Microsoft Research Cambridge. 
+
+From 2011 to 2018, I worked at Autonomy -> HP -> Hewlett Packard Enterprise -> Micro Focus leading their Computer Vision R&D team and was responsible for shipping IDOL MediaServer. Prior to 2011, I did a PhD in Signal Processing Lab, University of Cambridge on a Gates Cambridge Scholarship. My thesis was titled "Development and evaluation of a multiscale keypoint detector based on complex wavelets". In a previous life, I have built commercial foreign exchange software which is still being used full-steam today.
 
