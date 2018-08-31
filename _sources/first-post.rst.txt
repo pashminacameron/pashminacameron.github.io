@@ -5,30 +5,26 @@
    :tags: atag
    :author: Pashmina Cameron
 
-First Post
+Python
 ==========
 
-World, hello again! 
+Discussion on Cholesky decomposition in Python
 
-This very first paragraph of the post will be used
-as excerpt in archives and feeds. Find out how to control how much is shown
-in `Post Excerpts and Images
-<http://ablog.readthedocs.org/manual/post-excerpts-and-images/>`_. Remember
-that you can refer to posts by file name, e.g. ``:ref:`first-post``` results
-in :ref:`first-post`. Find out more at `Cross-Referencing Blog Pages
-<http://ablog.readthedocs.org/manual/cross-referencing-blog-pages/>`_.
-
+*************
 LLVM Numba
+*************
 
 LLVM provides a way to debug the vectorization performance of Numba. 
 
-LLVM outputs the generated assembly for each line of code - Great if you know assembly. If not, there are some useful pointers to understand what's going on without having to learn assembly (I recommend learning assembly!)
+LLVM outputs the generated assembly for each line of code - Great if you know assembly. If not, there are some useful pointers to understand what's going on without having to learn assembly (I recommend learning assembly!)::
 
-``add LLVM output here``
+    add LLVM output here
 
-From LLVM lib/Analysis/CostAnalysis.cpp inline documentation,
+From LLVM lib/Analysis/CostAnalysis.cpp inline documentation,::
 
-``The cost results are unit-less and the cost number represents the throughput of the machine assuming that all loads hit the cache, all branches are predicted, etc.``
+    The cost results are unit-less and the cost number represents the 
+    throughput of the machine assuming that all loads hit the cache, 
+    all branches are predicted, etc.
 
 LLVM logs may show something along the lines of::
 
@@ -47,7 +43,7 @@ Having all loops vectorized may not lead to fastest code. For example, using fas
 
 Also, see @vectorize (useful for creating vectorized functions that perform pairwise operations on the elements of an array) and @guvectorize (same as @vectorize, but allows operation over a subset of elements of an array) decorators for creating ufuncs. Note that, you cannot mix @vectorize, @guvectorize with @numba.jit vectorization. You need to choose the type of vectorization that suits your code the best and stick with it. 
 
-@numba.jitclass decorator allows entire classes to be JIT-compiled. A type specification of the members of the class needs to be provided; this allows the member data to be stored in C format, allowing member functions access to the raw data without having to go through the interpreter. Great - more like C. This is great, if you understand C/C++. if you don't understand C/C++, it can be hard to debug mistakes, especially as the interpreter support is limited in this mode, but it can be a boon for those who know C/C++ and want to bypass the interpreter. Recommended in late stages of optimization when you have run out of all options and still want to stick with Python in order to avoid retraining your users.
+@numba.jitclass decorator allows entire classes to be JIT-compiled. A type specification of the members of the class needs to be provided; this allows the member data to be stored in C format, allowing member functions access to the raw data without having to go through the interpreter. Great - more like C. This is great, if you understand C/C++. If you don't understand C/C++, it can be hard to debug mistakes, especially as the interpreter support is limited in this mode, but it can be a boon for those who know C/C++ and want to bypass the interpreter. Recommended in late stages of optimization when you have run out of all options and `still` want to stick with Python in order to avoid retraining your users.
 
 Also, see @cfunc decorator that allows you to create C-compatible callbacks for Python functions. 
 
@@ -90,7 +86,7 @@ Takeaways:
 
 .. rubric:: Footnotes
 
-.. [#f2] `Cholesky Factorization on SIMD multi-core architectures <https://hal.archives-ouvertes.fr/hal-01550129/document>`_
+.. [#f2] Cholesky Factorization on SIMD multi-core architectures `Paper <https://hal.archives-ouvertes.fr/hal-01550129/document>`_
 .. [#f1] If we have to sacrifice readability to such an extent that a new user cannot immediately comprehend the code, then we might as well write the code in a lower level language such as C/C++ and maximise speed gains.
 
 

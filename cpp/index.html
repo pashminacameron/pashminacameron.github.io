@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Optimizing C++ &mdash; Optimization blog  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about/" />
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+   
+  
+  <link rel="alternate" type="application/atom+xml"  href="../blog/atom.xml" title="Optimization blog Blog">
+  
+  
+  <link href="True" rel="stylesheet">
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../" class="icon icon-home"> Optimization blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/">About Pashmina Cameron</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Optimization blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../">Docs</a> &raquo;</li>
+        
+      <li>Optimizing C++</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="optimizing-c">
+<h1>Optimizing C++<a class="headerlink" href="#optimizing-c" title="Permalink to this headline">¶</a></h1>
+<p>Discussion on Cholesky decomposition in C++</p>
+<p>I used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which I outline where they exist.</p>
+<div class="section" id="algorithm-choice">
+<h2>Algorithm choice<a class="headerlink" href="#algorithm-choice" title="Permalink to this headline">¶</a></h2>
+<p>There are two variants of Cholesky decomposition: <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> and <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code>. We use the</p>
+<p>We will review the following variants of the same algorithm</p>
+<ol class="arabic simple">
+<li>C++ with -O3 optimization</li>
+<li>C++ with -O3 and -ffast-math optimization</li>
+<li>C++ with BLAS (single threaded)</li>
+<li>AVX</li>
+<li>Eigen without MKL</li>
+<li>MKL LAPACK (single threaded)</li>
+<li>MKL LAPACK (multi-threaded)</li>
+<li>CUDA</li>
+</ol>
+<p>We use LAPACK, Eigen and CUDA implementations to set ourselves a target, rather than to evaluate them. The aim here is to see how far we can go from a pure C++ implementation to AVX one.</p>
+<a class="reference internal image-reference" href="../_images/cpp-graphs.png"><img alt="alternate text" class="align-center" src="../_images/cpp-graphs.png" style="width: 800px;" /></a>
+</div>
+<div class="section" id="turbo-boost">
+<h2>Turbo Boost<a class="headerlink" href="#turbo-boost" title="Permalink to this headline">¶</a></h2>
+<p>Turbo Boost was disabled by following instructions <a class="reference external" href="https://www.tautvidas.com/blog/2011/04/disabling-intel-turbo-boost/">here</a>. With Turbo Boost enabled  (which is the default), timings are not consistent because the CPU clock frequency changes (as per temperature of the machine). Anaconda uses Intel MKL and I have not tested this on an ARM processor. All timings were taken in Ubuntu 18.04 (Windows Subsystem for Linux). To verify that Turbo Boost is off, you may find it useful to download Intel extreme tuning utility and check that the Max Core Frequency stays roughly constant when running benchmarks.</p>
+</div>
+<div class="section" id="numactl">
+<h2>numactl<a class="headerlink" href="#numactl" title="Permalink to this headline">¶</a></h2>
+<p>Intel MKL uses as many threads as there are physical cores on a machine by default. This behaviour can be controlled by setting <code class="code docutils literal notranslate"><span class="pre">MKL_NUM_THREADS</span></code> or <code class="code docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code>, read by MKL in that order, or by tying down the process to specific cores on a machine. <code class="code docutils literal notranslate"><span class="pre">numactl</span></code> allows you to do the latter. Use <code class="code docutils literal notranslate"><span class="pre">numactl</span> <span class="pre">-C</span> <span class="pre">0</span> <span class="pre">./testCholesky</span></code> to run the process on a single core, (only core 0 is accessible on WSL), and then use <code class="code docutils literal notranslate"><span class="pre">top</span></code> to verify that this is happening. WSL apparently only uses a single core, but I did manage to see 200% CPU usage without any of the above measures (for a machine with 2 physical cores).</p>
+</div>
+<div class="section" id="selective-optimizations">
+<h2>Selective optimizations<a class="headerlink" href="#selective-optimizations" title="Permalink to this headline">¶</a></h2>
+<p>GCC provides <code class="code docutils literal notranslate"><span class="pre">pragma</span></code> to selectively optimize a function, i.e. change the compiler flags for a single function at a time. The compile string does not show the actual flags used as those are only printed on a per file basis when calling cmake or make. These flags are, therefore invisible, and hence a little dangerous, but the option is there, should you want to change compiler flags for selected functions. A better way of doing this may be to move code that needs to be optimized to a separate file and changing the compiler flags for just that file. That way the flags will be available for inspection (while allowing the benefit of optimization without polluting other compilation units).</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>#pragma GCC push_options
+#pragma GCC optimize (&quot;-ffast-math&quot;)
+void functionToOptimize(const float * in, float * out)
+{
+      ...
+}
+#pragma GCC pop_options
+</pre></div>
+</div>
+<p>WSL does not report the existance of AVX2 and a few other variants of Intel instruction sets via <code class="code docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/proc/cpuinfo</span></code>, so you would need to check the Intel processor specifications to determine whether a particular instruction set is available.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Intel intrinsics guide</a></li>
+<li><a class="reference external" href="http://www.catb.org/esr/structure-packing/">Importance of packing and alignment</a></li>
+<li><a class="reference external" href="https://www.codeproject.com/Articles/874396/Crunching-Numbers-with-AVX-and-AVX">Tutrial on AVX/AVX2</a></li>
+<li><a class="reference external" href="http://www.pointclouds.org/news/2011/08/29/ffast-math/">Note on –ffast-math</a></li>
+<li><a class="reference external" href="https://devblogs.nvidia.com/even-easier-introduction-cuda/">Mark Harris’ CUDA introduction</a></li>
+<li><a class="reference external" href="https://www.youtube.com/playlist?list=PL3MXnVUbT1wTZ7Ud-7vh7k-8x2QOiwrI8">2017 A. M. Turing award talk</a> by Dr. David Patterson &amp; Dr. John Hennessy</li>
+<li><a class="reference external" href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0348b/BABIIBBG.html">Introduction to ARM NEON intrinsics</a></li>
+<li><a class="reference external" href="http://infocenter.arm.com/help/topic/com.arm.doc.ihi0073b/IHI0073B_arm_neon_intrinsics_ref.pdf">ARM NEON intrinsics guide</a></li>
+</ul>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+<div class="section">
+  <span style="float: left;">
+  
+  </span>
+  <span>&nbsp;</span>
+  <span style="float: right;">
+  
+  
+  <a href="../python/">
+    Optimizing Python
+    <i class="fa fa-arrow-circle-right"></i>
+  </a>
+  </span>
+  
+</div>
+
+  
+  
+  </div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pashmina Cameron.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

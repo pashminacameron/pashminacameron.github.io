@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Optimizing Python &mdash; Optimization blog  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about/" />
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+   
+  
+  <link rel="alternate" type="application/atom+xml"  href="../blog/atom.xml" title="Optimization blog Blog">
+  
+  
+  <link href="True" rel="stylesheet">
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../" class="icon icon-home"> Optimization blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/">About Pashmina Cameron</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Optimization blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../">Docs</a> &raquo;</li>
+        
+      <li>Optimizing Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="optimizing-python">
+<h1>Optimizing Python<a class="headerlink" href="#optimizing-python" title="Permalink to this headline">¶</a></h1>
+<p>Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well.</p>
+<div class="section" id="profiling">
+<h2>Profiling<a class="headerlink" href="#profiling" title="Permalink to this headline">¶</a></h2>
+<p>In order to get a good understanding of the performance bottlenecks, one can use any of Python’s standard profiling tools, but most of them only time function calls. If the slow functions are large, then it is helpful to to get a good idea of which lines the time is being spent in. A good utility for getting line by line timing is <code class="code docutils literal notranslate"><span class="pre">line_profiler</span></code>. Use <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">line_profiler</span></code> to install it. Add an <code class="code docutils literal notranslate"><span class="pre">&#64;profile</span></code> decorator to the functions you want to profile. Then use <code class="code docutils literal notranslate"><span class="pre">kernprof</span> <span class="pre">-l</span> <span class="pre">-v</span> <span class="pre">script.py</span></code> to see results of running profiling on <code class="code docutils literal notranslate"><span class="pre">script.py</span></code>. The output will look like this:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="gh">Line #      Hits         Time  Per Hit   % Time  Line Contents</span>
+<span class="gh">==============================================================</span>
+    19                                           @profile
+    20                                           def approxMagnitude(x, y):
+    21         1         13.0     13.0     65.0      small = min(x, y)
+    22         1          4.0      4.0     20.0      big = max(x, y)
+    23         1          3.0      3.0     15.0      return 0.414 * small + big
+</pre></div>
+</div>
+</div>
+<div class="section" id="llvm-numba">
+<h2>LLVM Numba<a class="headerlink" href="#llvm-numba" title="Permalink to this headline">¶</a></h2>
+<p>LLVM provides a way to debug the vectorization performance of Numba. To enable this, add the following lines before the <code class="code docutils literal notranslate"><span class="pre">&#64;numba.jit</span></code> decorator.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">llvmlite.binding</span> <span class="k">as</span> <span class="nn">llvm</span>
+
+<span class="n">llvm</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;--debug-only=loop-vectorize&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>LLVM output shows the assembly generated for the code. This gives some useful pointers to understand what’s going on without having to learn assembly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">....</span>
+<span class="n">LV</span><span class="p">:</span> <span class="n">Vector</span> <span class="n">loop</span> <span class="n">of</span> <span class="n">width</span> <span class="mi">2</span> <span class="n">costs</span><span class="p">:</span> <span class="mf">14.</span>
+<span class="n">LV</span><span class="p">:</span> <span class="n">Found</span> <span class="n">an</span> <span class="n">estimated</span> <span class="n">cost</span> <span class="n">of</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">VF</span> <span class="mi">4</span> <span class="n">For</span> <span class="n">instruction</span><span class="p">:</span>   <span class="o">%</span><span class="nb">sum</span><span class="o">.</span><span class="mi">221</span> <span class="o">=</span> <span class="n">phi</span> <span class="n">double</span> <span class="p">[</span> <span class="mf">0.000000e+00</span><span class="p">,</span> <span class="o">%</span><span class="n">B58</span><span class="o">.</span><span class="n">lr</span><span class="o">.</span><span class="n">ph</span> <span class="p">],</span> <span class="p">[</span> <span class="o">%.</span><span class="mi">607</span><span class="p">,</span> <span class="o">%</span><span class="n">B58</span> <span class="p">]</span>
+<span class="n">LV</span><span class="p">:</span> <span class="n">Found</span> <span class="n">an</span> <span class="n">estimated</span> <span class="n">cost</span> <span class="n">of</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">VF</span> <span class="mi">4</span> <span class="n">For</span> <span class="n">instruction</span><span class="p">:</span>   <span class="o">%.</span><span class="mf">378.020</span> <span class="o">=</span> <span class="n">phi</span> <span class="n">i64</span> <span class="p">[</span> <span class="o">%.</span><span class="mf">239.024</span><span class="p">,</span> <span class="o">%</span><span class="n">B58</span><span class="o">.</span><span class="n">lr</span><span class="o">.</span><span class="n">ph</span> <span class="p">],</span> <span class="p">[</span> <span class="o">%.</span><span class="mi">436</span><span class="p">,</span> <span class="o">%</span><span class="n">B58</span> <span class="p">]</span>
+<span class="n">LV</span><span class="p">:</span> <span class="n">Found</span> <span class="n">an</span> <span class="n">estimated</span> <span class="n">cost</span> <span class="n">of</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">VF</span> <span class="mi">4</span> <span class="n">For</span> <span class="n">instruction</span><span class="p">:</span>   <span class="o">%.</span><span class="mf">376.019</span> <span class="o">=</span> <span class="n">phi</span> <span class="n">i64</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="o">%</span><span class="n">B58</span><span class="o">.</span><span class="n">lr</span><span class="o">.</span><span class="n">ph</span> <span class="p">],</span> <span class="p">[</span> <span class="o">%.</span><span class="mi">440</span><span class="p">,</span> <span class="o">%</span><span class="n">B58</span> <span class="p">]</span>
+<span class="n">LV</span><span class="p">:</span> <span class="n">Found</span> <span class="n">an</span> <span class="n">estimated</span> <span class="n">cost</span> <span class="n">of</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">VF</span> <span class="mi">4</span> <span class="n">For</span> <span class="n">instruction</span><span class="p">:</span>   <span class="o">%.</span><span class="mi">436</span> <span class="o">=</span> <span class="n">add</span> <span class="n">nsw</span> <span class="n">i64</span> <span class="o">%.</span><span class="mf">378.020</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">LV</span><span class="p">:</span> <span class="n">Found</span> <span class="n">an</span> <span class="n">estimated</span> <span class="n">cost</span> <span class="n">of</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">VF</span> <span class="mi">4</span> <span class="n">For</span> <span class="n">instruction</span><span class="p">:</span>   <span class="o">%.</span><span class="mi">440</span> <span class="o">=</span> <span class="n">add</span> <span class="n">nuw</span> <span class="n">nsw</span> <span class="n">i64</span> <span class="o">%.</span><span class="mf">376.019</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">LV</span><span class="p">:</span> <span class="n">Found</span> <span class="n">an</span> <span class="n">estimated</span> <span class="n">cost</span> <span class="n">of</span> <span class="mi">8</span> <span class="k">for</span> <span class="n">VF</span> <span class="mi">4</span> <span class="n">For</span> <span class="n">instruction</span><span class="p">:</span>   <span class="o">%.</span><span class="mi">522</span> <span class="o">=</span> <span class="n">mul</span> <span class="n">i64</span> <span class="o">%.</span><span class="mf">376.019</span><span class="p">,</span> <span class="o">%</span><span class="n">arg</span><span class="o">.</span><span class="n">cholesky</span><span class="o">.</span><span class="mf">6.1</span>
+</pre></div>
+</div>
+<p>Note the following from LLVM documentation,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">cost</span> <span class="n">results</span> <span class="n">are</span> <span class="n">unit</span><span class="o">-</span><span class="n">less</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">cost</span> <span class="n">number</span> <span class="n">represents</span> <span class="n">the</span>
+<span class="n">throughput</span> <span class="n">of</span> <span class="n">the</span> <span class="n">machine</span> <span class="n">assuming</span> <span class="n">that</span> <span class="nb">all</span> <span class="n">loads</span> <span class="n">hit</span> <span class="n">the</span> <span class="n">cache</span><span class="p">,</span>
+<span class="nb">all</span> <span class="n">branches</span> <span class="n">are</span> <span class="n">predicted</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>You may see, for example, statements like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>LV: We can vectorize this loop!
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LV</span><span class="p">:</span> <span class="n">Not</span> <span class="n">vectorizing</span><span class="p">:</span> <span class="n">loop</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">meet</span> <span class="n">vectorization</span> <span class="n">requirements</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Having all loops vectorized may not lead to fastest code. For example, using fastmath=True forced LLVM to vectorize a loop, but led to slower code.</p>
+<p>Another decorator <code class="code docutils literal notranslate"><span class="pre">&#64;vectorize</span></code> is useful for creating vectorized functions that perform pairwise operations on the elements of an array. An extended version <code class="code docutils literal notranslate"><span class="pre">&#64;guvectorize</span></code> allows operation over a subset of elements of an array. Note that, <code class="code docutils literal notranslate"><span class="pre">&#64;vectorize</span></code> or <code class="code docutils literal notranslate"><span class="pre">&#64;guvectorize</span></code> cannot be mixed with <code class="code docutils literal notranslate"><span class="pre">&#64;numba.jit</span></code> vectorization. It is best to try both and choose the one that suits your code the best and stick with it.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">&#64;numba.jitclass</span></code> decorator allows entire classes to be JIT-compiled. A type specification of the members of the class needs to be provided; this allows the member data to be stored in C format, allowing member functions access to the raw data without having to go through the interpreter. This makes it more like <code class="code docutils literal notranslate"><span class="pre">C/C++</span></code>. Without a background in <code class="code docutils literal notranslate"><span class="pre">C/C++</span></code>, it can be hard to debug mistakes, especially as the interpreter support is limited in this mode, but it can be a boon for those who know <code class="code docutils literal notranslate"><span class="pre">C/C++</span></code> and want to bypass the interpreter. This is recommended in late stages of optimization when you have run out of all options and <cite>still</cite> want to stick with Python for the sake of readability.</p>
+<p>There is also a <code class="code docutils literal notranslate"><span class="pre">&#64;cfunc</span></code> decorator that allows you to create C-compatible callbacks for Python functions.</p>
+</div>
+<div class="section" id="analyzing-performance-of-cholesky-decomposition">
+<h2>Analyzing performance of Cholesky decomposition<a class="headerlink" href="#analyzing-performance-of-cholesky-decomposition" title="Permalink to this headline">¶</a></h2>
+<p>We chose Cholesky decomposition as the algorithm to do the comparison on because it is used in a wide variety of fields, is well understood, there are highly optimized versions of the algorithms available in every language to benchmark performance. Reasonably efficient implementations of Cholesky decomposition have been around for a while now, but <cite>efficient</cite> is a moving target in the face of ever-changing hardware baseline. This remains an active area of research <a class="footnote-reference" href="#f2" id="id1">[1]</a>.</p>
+<p>We will use the <code class="code docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">L</span> <span class="pre">L^T</span></code> variant of Cholesky decomposition because this variant is cache-friendly. Using <code class="code docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">LDL*</span></code> avoids computing square roots, but includes an extra multiplication in an <code class="code docutils literal notranslate"><span class="pre">O(N^3)</span></code> loop, whereas the square root occurs in a <code class="code docutils literal notranslate"><span class="pre">O(N)</span></code> loop.</p>
+<p>We will review the following variants of the same algorithm</p>
+<ol class="arabic simple">
+<li>Python implementation</li>
+<li>NumPy implementation (uses Numpy matrices but does not use np.linalg package)</li>
+<li>Numba implementation</li>
+<li>numpy.linalg.cholesky</li>
+<li>scipy.linalg.cholesky</li>
+<li>scipy.linalg.lapack.cholesky</li>
+<li>scikit-cuda</li>
+</ol>
+<p>We use numpy and scipy implementations to set ourselves a target, rather than to evaluate them. The aim here is to see how far we can go from a pure Python implementation to Numba one without putting in a lot of effort or sacrificing readbility of the code <a class="footnote-reference" href="#f1" id="id2">[2]</a> .</p>
+<a class="reference internal image-reference" href="../_images/python-graphs.png"><img alt="alternate text" class="align-center" src="../_images/python-graphs.png" style="width: 800px;" /></a>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>If there is an optimized implementation available for your algorithm (such as scipy.linalg.lapack.cholesky), use that instead!</li>
+<li>Numba can get you pretty close to optimized algorithms with very little effort (if the algorithm lends itself to vectorization). This is useful when you want to optimize <em>your</em> code, not a standard linear algebra routine.</li>
+</ul>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Cholesky Factorization on SIMD multi-core architectures <a class="reference external" href="https://hal.archives-ouvertes.fr/hal-01550129/document">Paper</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>If we have to sacrifice readability to such an extent that a new user cannot immediately comprehend the code, then we might as well write the code in a lower level language such as C/C++ and maximise speed gains.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://numba.pydata.org/numba-doc/dev/user/jit.html">Numba documentation</a></li>
+<li><a class="reference external" href="https://www.ibm.com/developerworks/community/blogs/jfp/entry/A_Comparison_Of_C_Julia_Python_Numba_Cython_Scipy_and_BLAS_on_LU_Factorization?lang=en">Comparison of C, Julia and Cython for LU decomposition</a></li>
+<li><a class="reference external" href="https://blog.zopa.com/2018/03/27/optimisation-algorithms-zopa-part-ii-speeding-python-numba/">Numba under the hood</a></li>
+<li><a class="reference external" href="https://devblogs.nvidia.com/numba-python-cuda-acceleration/">Mark Harris’ blog on Numba</a></li>
+<li><a class="reference external" href="https://rushter.com/blog/numba-cython-python-optimization/">Simple explanation of Numba</a></li>
+<li><a class="reference external" href="https://github.com/rkern/line_profiler">Line profiler</a></li>
+</ul>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+<div class="section">
+  <span style="float: left;">
+  
+  
+  <a href="../cpp/">
+    <i class="fa fa-arrow-circle-left"></i>
+    Optimizing C++
+  </a>
+  
+  </span>
+  <span>&nbsp;</span>
+  <span style="float: right;">
+  
+</div>
+
+  
+  
+  </div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pashmina Cameron.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
