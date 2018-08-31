@@ -8,7 +8,7 @@ Pashmina Cameron's Blog
 
 
 
-Information related to  RSE 2018 talk **Fast code with just enough effort** is available at
+Information related to  RSE 2018 talk :download:`pdf <docs/RSE2018Talk.pdf>` **Fast code with just enough effort** is available at
  
  - :ref:`python` 
  - :ref:`cpp`
