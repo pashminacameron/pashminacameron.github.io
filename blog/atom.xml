@@ -2,10 +2,83 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Optimization blog Blog</title>
   <id>True/blog/atom.xml</id>
-  <updated>2018-07-29T00:00:00Z</updated>
+  <updated>2018-08-30T00:00:00Z</updated>
   <link href="True" />
   <link href="True/blog/atom.xml" rel="self" />
   <generator uri="http://ablog.readthedocs.org" version="0.9.2">ABlog</generator>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">Graphics Processing Units (GPUs)</title>
+    <id>True/gpus/</id>
+    <updated>2018-08-30T00:00:00Z</updated>
+    <published>2018-08-30T00:00:00Z</published>
+    <link href="True/gpus/" />
+    <author>
+      <name>Pashmina Cameron</name>
+    </author>
+    <content type="html">&lt;p&gt;Graphics processing units were one of the earliest forms of accelerator put
+to general purpose uses.  Initially this was entirely done by using / missusing
+the graphics processing pipelines.   This limited what could be done and lead
+to some very creative algorithms to make progress under these limitations.&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">Field Programmable Gate Arrays (FPGAs)</title>
+    <id>True/fpgas/</id>
+    <updated>2018-08-30T00:00:00Z</updated>
+    <published>2018-08-30T00:00:00Z</published>
+    <link href="True/fpgas/" />
+    <author>
+      <name>Pashmina Cameron</name>
+    </author>
+    <content type="html">&lt;p&gt;We will use the term FPGA to cover the class of programmable hardware
+which can be used to implement almost any digital circuit at runtime.
+This means that the hardware architecture can be optimized to the precise
+use case, allowing flexibility like variable precision and vector width
+across the pipeline and massive amounts of controlled parallism.&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">Domain Specific Architectures (DSAs)</title>
+    <id>True/DomainSpecificArchitectures/</id>
+    <updated>2018-08-30T00:00:00Z</updated>
+    <published>2018-08-30T00:00:00Z</published>
+    <link href="True/DomainSpecificArchitectures/" />
+    <author>
+      <name>Pashmina Cameron</name>
+    </author>
+    <content type="html">&lt;p&gt;Certain applications have sufficient demand to lead to the ultimate optmization
+technique - designing hardware targetted at that one application.
+Examples of this include:&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">Digital Signal Processors (DSPs)</title>
+    <id>True/DSPs/</id>
+    <updated>2018-08-30T00:00:00Z</updated>
+    <published>2018-08-30T00:00:00Z</published>
+    <link href="True/DSPs/" />
+    <author>
+      <name>Pashmina Cameron</name>
+    </author>
+    <content type="html">&lt;p&gt;Whilst DSPs are mostly found in mobile platforms, they are an important for
+of accelerator.&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">Heterogenous Compute</title>
+    <id>True/heterogenous/</id>
+    <updated>2018-08-29T00:00:00Z</updated>
+    <published>2018-08-29T00:00:00Z</published>
+    <link href="True/heterogenous/" />
+    <author>
+      <name>Pashmina Cameron</name>
+    </author>
+    <content type="html">&lt;p&gt;As we reach the end of Moore’s (CPU performance double every 2 years) and
+Dennard scaling (as transistors get smaller their power density remains
+constant - so each transistor uses less power), the focus of computer
+architecture has move towards Heterogenous computing.&lt;/p&gt;
+</content>
+  </entry>
   <entry xml:base="True/blog/atom.xml">
     <title type="text">Optimizing Python</title>
     <id>True/python/</id>
@@ -15,7 +88,7 @@
     <author>
       <name>Pashmina Cameron</name>
     </author>
-    <content type="html">&lt;p&gt;Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at &lt;a class=&quot;reference external&quot; href=&quot;github.com/pashminacameron/cholesky_benchmarking&quot;&gt;cholesky_benchmarking&lt;/a&gt; Github repo. For scikit-cuda, we used the example code from the documentation.&lt;/p&gt;
 </content>
   </entry>
   <entry xml:base="True/blog/atom.xml">

@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Heterogenous Compute &mdash; Optimization blog  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about/" />
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+   
+  
+  <link rel="alternate" type="application/atom+xml"  href="../blog/atom.xml" title="Optimization blog Blog">
+  
+  
+  <link href="True" rel="stylesheet">
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../" class="icon icon-home"> Optimization blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/">About Pashmina Cameron</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Optimization blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../">Docs</a> &raquo;</li>
+        
+      <li>Heterogenous Compute</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/heterogenous.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="heterogenous-compute">
+<h1>Heterogenous Compute<a class="headerlink" href="#heterogenous-compute" title="Permalink to this headline">¶</a></h1>
+<p>As we reach the end of Moore’s (CPU performance double every 2 years) and
+Dennard scaling (as transistors get smaller their power density remains
+constant - so each transistor uses less power), the focus of computer
+architecture has move towards Heterogenous computing.</p>
+<p>A good overview of computer architecture in general and this topic in particular may be found in:</p>
+<ul class="simple">
+<li>Computer Architecture: A Quantative Approach (John Hennesy, David Patterson)
+<a class="reference external" href="https://www.amazon.co.uk/Computer-Architecture-Quantitative-Approach-Kaufmann/dp/012383872X">Amazon</a></li>
+<li>John Hennesy and David Patterson 2017 ACM Turing Award Lecture <a class="reference external" href="https://www.youtube.com/watch?v=3LVeEjsn8Ts">youtube</a></li>
+</ul>
+<div class="section" id="what-is-heterogenous-compute">
+<h2>What is heterogenous compute?<a class="headerlink" href="#what-is-heterogenous-compute" title="Permalink to this headline">¶</a></h2>
+<p>This term is used to cover the mixture of traditional CPU based computing with
+more special purpose devices that are optimized for particular types of
+algorithm.</p>
+<p>This includes</p>
+<ul class="simple">
+<li><strong>CPUs</strong> - It may seem obvious but the thing that makes these approaches
+heterogenous is that we have a mixture of different compute devices.
+The highest performance systems make use of the CPU for what it is best
+at in conjunction with more specialist devices.</li>
+<li><a class="reference internal" href="../gpus/#gpu-label"><span class="std std-ref">GPUs</span></a> - Modern Graphics Processors have features specifically to enable
+/ enhance their use for non graphics tasks.</li>
+<li><a class="reference internal" href="../DSPs/"><span class="doc">DSPs</span></a> - A class of general purpose CPU with very different characteristics
+from a CPU.  Suited for stream processing.</li>
+<li><a class="reference internal" href="../fpgas/"><span class="doc">FGPGAs</span></a> - Flexible devices that let you implement almost any hardware design
+you want.  This is often the path to a <em>cheap</em> or <em>on demand</em> domain
+specific accelerator.</li>
+<li><a class="reference internal" href="../DomainSpecificArchitectures/"><span class="doc">Domain Specific Architectures (DSAs)</span></a> - These can still have a high degree of
+programability but they are hardware that has been designed to take on
+one class of problems.  GPUs started as domain specific processors but now
+their wide applicabilty puts them in a class of their own.</li>
+</ul>
+<p>This section is not intended to be a complete description of any of these
+large areas, but rather a brief introduction to point people in the right
+direction.</p>
+</div>
+<div class="section" id="system-on-chip-soc">
+<h2>System on Chip (SoC)<a class="headerlink" href="#system-on-chip-soc" title="Permalink to this headline">¶</a></h2>
+<p>Mobile processors and increasingly desktop processors are heterogenous
+devices.  An extreme example is the recently announced
+<a class="reference external" href="https://developer.nvidia.com/embedded/buy/jetson-xavier-devkit">NVIDIA Xavier SoC</a></p>
+<ul class="simple">
+<li>8 Core CPU</li>
+<li>8 SM Volta GPU</li>
+<li>Deep learning accelerator</li>
+<li>Programable vision accelerator (vector processing unit)</li>
+<li>Stereo and optic flow engine</li>
+<li>Image signal processor</li>
+</ul>
+</div>
+<div class="section" id="general-resources">
+<h2>General Resources<a class="headerlink" href="#general-resources" title="Permalink to this headline">¶</a></h2>
+<p>There are some good online resources and conferences with the latest news
+on hardware accelerators.</p>
+<div class="section" id="websites">
+<h3>Websites<a class="headerlink" href="#websites" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://www.nextplatform.com">http://www.nextplatform.com</a> : A website focused on HPC and large scale
+computing.  As heteregenous computing forms a large part high end HPC
+this is often a good place to follow upcoming trends.</li>
+</ul>
+</div>
+<div class="section" id="conferences">
+<h3>Conferences<a class="headerlink" href="#conferences" title="Permalink to this headline">¶</a></h3>
+<p>Computer architecture conferences:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.hotchips.com">http://www.hotchips.com</a> : Mainly industry presentations.</li>
+<li><a class="reference external" href="http://www.isca.com">http://www.isca.com</a> : A much more accademic focused conference.</li>
+</ul>
+</div>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+<div class="section">
+  <span style="float: left;">
+  
+  
+  <a href="../python/">
+    <i class="fa fa-arrow-circle-left"></i>
+    Optimizing Python
+  </a>
+  
+  </span>
+  <span>&nbsp;</span>
+  <span style="float: right;">
+  
+  
+  <a href="../DSPs/">
+    Digital Signal Processors (DSPs)
+    <i class="fa fa-arrow-circle-right"></i>
+  </a>
+  </span>
+  
+</div>
+
+  
+  
+  </div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pashmina Cameron.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

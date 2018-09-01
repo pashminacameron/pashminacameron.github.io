@@ -13,11 +13,14 @@ Further analysis can be found at:
  - :ref:`python`
  - :ref:`cpp`
 
+ Additional information on hardware accelerators may be found at:
+
+ - :ref:`heterogenous`
+   
  In future, we may look at 
 
  - effect of cache sizes and cache misses
  - ARM assembly starter examples
- - custom hardware accelerators
 
 
 .. postlist:: 0

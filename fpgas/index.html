@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Field Programmable Gate Arrays (FPGAs) &mdash; Optimization blog  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about/" />
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+   
+  
+  <link rel="alternate" type="application/atom+xml"  href="../blog/atom.xml" title="Optimization blog Blog">
+  
+  
+  <link href="True" rel="stylesheet">
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../" class="icon icon-home"> Optimization blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/">About Pashmina Cameron</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Optimization blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../">Docs</a> &raquo;</li>
+        
+      <li>Field Programmable Gate Arrays (FPGAs)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/fpgas.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="field-programmable-gate-arrays-fpgas">
+<span id="page-fgpas"></span><h1>Field Programmable Gate Arrays (FPGAs)<a class="headerlink" href="#field-programmable-gate-arrays-fpgas" title="Permalink to this headline">¶</a></h1>
+<p>We will use the term FPGA to cover the class of programmable hardware
+which can be used to implement almost any digital circuit at runtime.
+This means that the hardware architecture can be optimized to the precise
+use case, allowing flexibility like variable precision and vector width
+across the pipeline and massive amounts of controlled parallism.</p>
+<p>There are two major manufacturers of FPGAs who are both focussing heavily
+on their useage as compute accelerators.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.xilinx.com">http://www.xilinx.com</a></li>
+<li><a class="reference external" href="http://www.altera.com">http://www.altera.com</a> (now part of Intel)</li>
+</ul>
+<p>As you will see much of the following divides into the different approaches
+each of these players has taken.</p>
+<div class="section" id="what-can-you-do-with-an-fpga">
+<h2>What can you do with an FPGA?<a class="headerlink" href="#what-can-you-do-with-an-fpga" title="Permalink to this headline">¶</a></h2>
+<p>Modern FPGAs are a mixture of hard IP, which are somewhat general purpose
+components, such as memory or arithmetic units, combined with Logic Gate
+arrays in which you can implement general digital circuits.  This combination
+allows for much better speed, space and power efficiency.</p>
+<p>The main advantages over Domain Specific Architectures are:</p>
+<ul class="simple">
+<li>Enabling compute on demand as the cost of the FPGA hardware can be shared by
+a large number of different applications.  Hence we get the rapid scale up
+options in the cloud that we are used to for CPU instances.</li>
+<li>Flexiblity as your requirements change.  This leads to very fast turn around.
+FPGAs are suited for approaches such as agile development that are not
+possible when timescales to burn a chip are involved.</li>
+</ul>
+</div>
+<div class="section" id="how-to-program-an-fpga">
+<h2>How to program an FPGA<a class="headerlink" href="#how-to-program-an-fpga" title="Permalink to this headline">¶</a></h2>
+<p>FPGAs have traditionally been programmed using hardware description languages
+such as <a class="reference external" href="https://en.wikipedia.org/wiki/Verilog">Verilog</a> and
+<a class="reference external" href="https://en.wikipedia.org/wiki/VHDL">VHDL</a>.
+These are also the languages used to describe
+hardware which will become an actual chip.  Whilst extremely powerful, they
+represent a steep enough learning curve for an experienced software engineer
+that a lot of research and development has gone into tools and compilers to
+make the FPGA development workflow closer to that developers are already
+familiar with.</p>
+<div class="section" id="c-opencl">
+<h3>C++ / OpenCL<a class="headerlink" href="#c-opencl" title="Permalink to this headline">¶</a></h3>
+<p>A number of projects exist to take OpenCL code and compile it into the
+hardware description that is programmed to the FPGA:</p>
+<p><strong>Altera</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.intel.com/content/www/us/en/software/programmable/sdk-for-opencl/overview.html">OpenCL SDK</a></li>
+<li><a class="reference external" href="https://www.bu.edu/caadlab/HEART18a.pdf">FPGA HPC using OpenCL: Case Study in 3D FFT</a> - Ahmed Sanaullah and Martin Herbordt</li>
+</ul>
+<p><strong>Xilinx</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.xilinx.com/products/design-tools/software-zone/sdaccel.html">SDAccel</a></li>
+<li><a class="reference external" href="https://link.springer.com/article/10.1007/s11227-018-2367-9">Simultaneous multiprocessing in a software-defined heterogeneous FPGA</a> - Jose Nunez-Yanez et l.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="connectivity-options">
+<h2>Connectivity options<a class="headerlink" href="#connectivity-options" title="Permalink to this headline">¶</a></h2>
+<p>Here we are mostly interested in the potential to accelerate an existing
+algorithm by using an FPGA to accelerate some elements whilst a conventional
+CPU is responsible for the full program and FPGA management etc.  Hence
+we will focus on those</p>
+<div class="section" id="cpu-integrated-fpgas">
+<h3>CPU integrated FPGAs<a class="headerlink" href="#cpu-integrated-fpgas" title="Permalink to this headline">¶</a></h3>
+<p>Intel has annouced a variant of the Xeon CPU that includes, in package
+a large FPGA.</p>
+<blockquote>
+<div><a class="reference external" href="https://www.nextplatform.com/2018/05/24/a-peek-inside-that-intel-xeon-fpga-hybrid-chip/">https://www.nextplatform.com/2018/05/24/a-peek-inside-that-intel-xeon-fpga-hybrid-chip/</a></div></blockquote>
+<p>Xilinx has a range of products integrating CPUs directly within the FPGA
+and provides good support for running Linux on these.</p>
+<blockquote>
+<div><a class="reference external" href="https://www.xilinx.com/products/silicon-devices/soc/zynq-ultrascale-mpsoc.html">https://www.xilinx.com/products/silicon-devices/soc/zynq-ultrascale-mpsoc.html</a></div></blockquote>
+</div>
+<div class="section" id="expansion-bus-connected-accelerators">
+<h3>Expansion bus connected accelerators<a class="headerlink" href="#expansion-bus-connected-accelerators" title="Permalink to this headline">¶</a></h3>
+<p>Currently most FPGA accelerators are attached to normal servers via the PCIe
+bus at Gen 3.0 speeds. All the major devices are available in this form factor.
+Gen 4.0 PCIe devices are starting to become available.</p>
+<p>Emerging interconnect options such <a class="reference external" href="https://www.intel.com/content/www/us/en/io/quickpath-technology/quickpath-technology-general.html">Intel QPI</a>, <a class="reference external" href="https://opencapi.org/">OpenCAPI 2.0</a> and <a class="reference external" href="https://www.ccixconsortium.com/">CCIX</a>.  All these allow for coherent caches with the CPUs greatly accelerating some types of applications.</p>
+</div>
+<div class="section" id="example-systems-usecases">
+<h3>Example Systems / Usecases<a class="headerlink" href="#example-systems-usecases" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://www.microsoft.com/en-us/research/project/project-catapult/">Project Catapult - Microsoft</a></li>
+<li><a class="reference external" href="https://www.microsoft.com/en-us/research/uploads/prod/2018/06/ISCA18-Brainwave-CameraReady.pdf">Project Brainwave - Microsoft</a></li>
+<li><a class="reference external" href="https://www.xilinx.com/products/design-tools/cloud-based-acceleration.html">List of Xilinx Based Cloud Server Offerings</a> includes Alibaba, Amazon, Baidu, Huawei, Nimbix and Tencent</li>
+</ul>
+</div>
+</div>
+</div>
+
+  <div class="section">
+  
+    
+
+
+<div class="section">
+  <span style="float: left;">
+  
+  
+  <a href="../DomainSpecificArchitectures/">
+    <i class="fa fa-arrow-circle-left"></i>
+    Domain Specific Architectures (DSAs)
+  </a>
+  
+  </span>
+  <span>&nbsp;</span>
+  <span style="float: right;">
+  
+  
+  <a href="../gpus/">
+    Graphics Processing Units (GPUs)
+    <i class="fa fa-arrow-circle-right"></i>
+  </a>
+  </span>
+  
+</div>
+
+  
+  
+  </div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pashmina Cameron.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

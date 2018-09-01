@@ -161,7 +161,7 @@
             
   <div class="section" id="optimizing-python">
 <h1>Optimizing Python<a class="headerlink" href="#optimizing-python" title="Permalink to this headline">¶</a></h1>
-<p>Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda.</p>
+<p>Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at <a class="reference external" href="github.com/pashminacameron/cholesky_benchmarking">cholesky_benchmarking</a> Github repo. For scikit-cuda, we used the example code from the documentation.</p>
 <div class="section" id="profiling">
 <h2>Profiling<a class="headerlink" href="#profiling" title="Permalink to this headline">¶</a></h2>
 <p>In order to get a good understanding of the performance bottlenecks, one can use any of Python’s standard profiling tools, but most of them only time function calls. If the slow functions are large, then it is helpful to to get a good idea of which lines the time is being spent in. A good utility for getting line by line timing is <code class="code docutils literal notranslate"><span class="pre">line_profiler</span></code>. Use <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">line_profiler</span></code> to install it. Add an <code class="code docutils literal notranslate"><span class="pre">&#64;profile</span></code> decorator to the functions you want to profile. Then use <code class="code docutils literal notranslate"><span class="pre">kernprof</span> <span class="pre">-l</span> <span class="pre">-v</span> <span class="pre">script.py</span></code> to see results of running profiling on <code class="code docutils literal notranslate"><span class="pre">script.py</span></code>. The output will look like this:</p>
@@ -297,6 +297,13 @@
   </span>
   <span>&nbsp;</span>
   <span style="float: right;">
+  
+  
+  <a href="../heterogenous/">
+    Heterogenous Compute
+    <i class="fa fa-arrow-circle-right"></i>
+  </a>
+  </span>
   
 </div>
 
