@@ -8,7 +8,7 @@
 Optimizing Python
 ====================
 
-Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. 
+Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda.
 
 ************
 Profiling
@@ -26,9 +26,35 @@ In order to get a good understanding of the performance bottlenecks, one can use
         22         1          4.0      4.0     20.0      big = max(x, y)
         23         1          3.0      3.0     15.0      return 0.414 * small + big
 
+After profiling it's worth thinking about whether the time is spent in places you expect it to be spent, i.e. at the heart of your computation. If not, then some simple refactoring could speed the code up. It's also worth thinking about data layout and cache friendliness at this point. 
+
 *************
-LLVM Numba
+Numba
 *************
+
+Numba is a type-specialising JIT compiler for Python, powered by LLVM. Numba uses Python byte code and type information to produce machine code using LLVM. To get the best optimization performance out of Numba, you will want to use the following options: 
+
+.. code-block:: python
+
+    @numba.jit('(float64[:, :], float64[:, :])',nopython=True, nogil=True, parallel=True)
+
+:code:`nopython=True` causes the compiler to fail hard if a numba can't vectorize a line of code and avoids the compiler from falling back to Python silently. This is useful for making sure that all of your code is being vectorized. Often, it is possible to refactor the code slightly to allow the compiler to vectorize the code. :code:`nogil=True` disables the dreaded Python global interpreter lock, and this is useful for taking advantage of multi-core processors. Since Numba deals with native types, not Python pbjects, the GIL can be safely released with the usual caveats of writing good multi-threaded code (i.e. programmer manages synchronization and race conditions). :code:`parallel=True` enables automatic parallelization. In the current example, :code:`cache=True` option which enables caching of the compiled function on disk gave the same performance as :code:`parallel=True` and the two can't be used together. 
+
+Another decorator :code:`@vectorize` is useful for creating vectorized functions that perform pairwise operations on the elements of an array. An extended version :code:`@guvectorize` allows operation over a subset of elements of an array. Note that, :code:`@vectorize` or :code:`@guvectorize` cannot be mixed with :code:`@numba.jit` vectorization. It is best to try both and choose the one that suits your code the best and stick with it. 
+
+:code:`@numba.jitclass` decorator allows entire classes to be JIT-compiled. A type specification of the members of the class needs to be provided; this allows the member data to be stored in C format, allowing member functions access to the raw data without having to go through the interpreter. This makes it more like :code:`C/C++`. Without a background in :code:`C/C++`, it can be hard to debug mistakes, especially as the interpreter support is limited in this mode, but it can be a boon for those who know :code:`C/C++` and want to bypass the interpreter. This is recommended in late stages of optimization when you have run out of all options and `still` want to stick with Python for the sake of readability.
+
+There is also a :code:`@cfunc` decorator that allows you to create C-compatible callbacks for Python functions. A few related things you may want to look up are :code:`@cuda.jit` decorator and HPAT package. 
+
+Advantages of using Numba over C++/SIMD:
+
+- Ease of use, saves effort
+- JIT can optimize across module boundaries
+
+A few things that Numba doesn't do are:
+
+- String manipulations
+- Exception handling
 
 LLVM provides a way to debug the vectorization performance of Numba. To enable this, add the following lines before the :code:`@numba.jit` decorator.::
 
@@ -63,12 +89,6 @@ or ::
 
 Having all loops vectorized may not lead to fastest code. For example, using fastmath=True forced LLVM to vectorize a loop, but led to slower code. 
 
-Another decorator :code:`@vectorize` is useful for creating vectorized functions that perform pairwise operations on the elements of an array. An extended version :code:`@guvectorize` allows operation over a subset of elements of an array. Note that, :code:`@vectorize` or :code:`@guvectorize` cannot be mixed with :code:`@numba.jit` vectorization. It is best to try both and choose the one that suits your code the best and stick with it. 
-
-:code:`@numba.jitclass` decorator allows entire classes to be JIT-compiled. A type specification of the members of the class needs to be provided; this allows the member data to be stored in C format, allowing member functions access to the raw data without having to go through the interpreter. This makes it more like :code:`C/C++`. Without a background in :code:`C/C++`, it can be hard to debug mistakes, especially as the interpreter support is limited in this mode, but it can be a boon for those who know :code:`C/C++` and want to bypass the interpreter. This is recommended in late stages of optimization when you have run out of all options and `still` want to stick with Python for the sake of readability.
-
-There is also a :code:`@cfunc` decorator that allows you to create C-compatible callbacks for Python functions. 
-
 ****************************************************
 Analyzing performance of Cholesky decomposition
 ****************************************************
@@ -100,6 +120,7 @@ Conclusion
 
 * If there is an optimized implementation available for your algorithm (such as scipy.linalg.lapack.cholesky), use that instead! 
 * Numba can get you pretty close to optimized algorithms with very little effort (if the algorithm lends itself to vectorization). This is useful when you want to optimize *your* code, not a standard linear algebra routine. 
+* While scikit-cuda provides a low effort route to harness the power of a GPU, a large fraction of the total time in scikit-cuda is spent in doing the data transfer to and from the GPU, so it's worth minimizing the number of trips to the GPU and back. If it is not possible to chain operations in order to minimize the trips to GPU, then most likely you are better off sticking to scipy.linalg.lapack for standard routines. scipy.linalg.lapack seems to provide the best speed-effort tradeoff, especially at small matrix sizes. 
 
 .. rubric:: Footnotes
 

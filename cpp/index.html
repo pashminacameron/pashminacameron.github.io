@@ -162,10 +162,10 @@
   <div class="section" id="optimizing-c">
 <h1>Optimizing C++<a class="headerlink" href="#optimizing-c" title="Permalink to this headline">¶</a></h1>
 <p>Discussion on Cholesky decomposition in C++</p>
-<p>I used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which I outline where they exist.</p>
+<p>We used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which we outline where they exist.</p>
 <div class="section" id="algorithm-choice">
 <h2>Algorithm choice<a class="headerlink" href="#algorithm-choice" title="Permalink to this headline">¶</a></h2>
-<p>There are two variants of Cholesky decomposition: <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> and <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code>. We use the</p>
+<p>There are two variants of Cholesky decomposition: <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> and <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code>. We use the <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> variant here, except where outlined, to compare it to <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code> variant.</p>
 <p>We will review the following variants of the same algorithm</p>
 <ol class="arabic simple">
 <li>C++ with -O3 optimization</li>
@@ -187,6 +187,25 @@
 <div class="section" id="numactl">
 <h2>numactl<a class="headerlink" href="#numactl" title="Permalink to this headline">¶</a></h2>
 <p>Intel MKL uses as many threads as there are physical cores on a machine by default. This behaviour can be controlled by setting <code class="code docutils literal notranslate"><span class="pre">MKL_NUM_THREADS</span></code> or <code class="code docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code>, read by MKL in that order, or by tying down the process to specific cores on a machine. <code class="code docutils literal notranslate"><span class="pre">numactl</span></code> allows you to do the latter. Use <code class="code docutils literal notranslate"><span class="pre">numactl</span> <span class="pre">-C</span> <span class="pre">0</span> <span class="pre">./testCholesky</span></code> to run the process on a single core, (only core 0 is accessible on WSL), and then use <code class="code docutils literal notranslate"><span class="pre">top</span></code> to verify that this is happening. WSL apparently only uses a single core, but I did manage to see 200% CPU usage without any of the above measures (for a machine with 2 physical cores).</p>
+</div>
+<div class="section" id="compiler-options">
+<h2>Compiler options<a class="headerlink" href="#compiler-options" title="Permalink to this headline">¶</a></h2>
+<p>Compiler options can make quite a difference in the speed (as well as size and behaviour) of the code. <code class="code docutils literal notranslate"><span class="pre">-O2</span></code> is the highest level of optimization you can request without sacrificing safety of the code. Going from <code class="code docutils literal notranslate"><span class="pre">-O2</span></code> to <code class="code docutils literal notranslate"><span class="pre">-O3</span></code> shows very little gain in speed, but adding <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> (which turns on <code class="code docutils literal notranslate"><span class="pre">-O3</span></code>)does improve the speed noticeably. However, this comes at a cost.</p>
+<a class="reference internal image-reference" href="../_images/cpp-compileroptions.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compileroptions.png" style="width: 800px;" /></a>
+<p><code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see section on Selective Optimizations) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler play wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it.</p>
+<a class="reference internal image-reference" href="../_images/cpp-compileroptions-safety-speed.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compileroptions-safety-speed.png" style="width: 800px;" /></a>
+</div>
+<div class="section" id="best-case-limits-for-simd">
+<h2>Best case limits for SIMD<a class="headerlink" href="#best-case-limits-for-simd" title="Permalink to this headline">¶</a></h2>
+<p>Both Intel and ARM provide information on latency and throughput of each of their SIMD instructions. See for example, here, a screenshot of the Intel intrinsics guide.</p>
+<a class="reference internal image-reference" href="../_images/cpp-assemblyguide.png"><img alt="alternate text" class="align-center" src="../_images/cpp-assemblyguide.png" style="width: 800px;" /></a>
+<p>Looking these numbers up is a good way to choose between instructions and also determine whether or not it is worth coding up an intrinsics/assembly version of your code. For example, if the instruction you need is not available, and you have to use multiple instructions to get your work done, it may not actually speed up your code. You may have to redesign your algorithm.</p>
+</div>
+<div class="section" id="debugging-auto-generated-assembly">
+<h2>Debugging auto generated assembly<a class="headerlink" href="#debugging-auto-generated-assembly" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, you write intrinsics and you don’t get the expected speedup. In such cases, it could be that the compiler is not generating the assembly code you were hoping for. You can look at the disassembly and find out if this is the case. For example, this is the disassembly for add_avx function compiled with GCC 4.9 and GCC 5.4. GCC 5.4 unrolled the loop, whereas GCC 4.9 didn’t, hence the same code compiled with GCC 4.9 was slower.</p>
+<a class="reference internal image-reference" href="../_images/cpp-debugging-assembly.png"><img alt="alternate text" class="align-center" src="../_images/cpp-debugging-assembly.png" style="width: 800px;" /></a>
+<p>Of course, it’s always best to upgrade to a newer compiler, if you have the freedom to do so. If you can’t change the compiler, then you may want to just write the assembly yourself (rather than use intrinsics), but if you have sufficient knowledge to write the assembly, you can get away by copying the assembly from the disassembly and then modifying it to use correct registers and so on. This would allow you to bypass the compiler asm doing the wrong conversion from intrinsics to assembly.</p>
 </div>
 <div class="section" id="selective-optimizations">
 <h2>Selective optimizations<a class="headerlink" href="#selective-optimizations" title="Permalink to this headline">¶</a></h2>

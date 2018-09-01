@@ -10,12 +10,12 @@ Optimizing C++
 
 Discussion on Cholesky decomposition in C++
 
-I used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which I outline where they exist. 
+We used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which we outline where they exist. 
 
 *****************
 Algorithm choice
 *****************
-There are two variants of Cholesky decomposition: :code:`LL^T` and :code:`LDL^T`. We use the 
+There are two variants of Cholesky decomposition: :code:`LL^T` and :code:`LDL^T`. We use the :code:`LL^T` variant here, except where outlined, to compare it to :code:`LDL^T` variant.
 
 We will review the following variants of the same algorithm
 
@@ -44,7 +44,51 @@ Turbo Boost was disabled by following instructions `here <https://www.tautvidas.
 numactl
 *************
 
-Intel MKL uses as many threads as there are physical cores on a machine by default. This behaviour can be controlled by setting :code:`MKL_NUM_THREADS` or :code:`OMP_NUM_THREADS`, read by MKL in that order, or by tying down the process to specific cores on a machine. :code:`numactl` allows you to do the latter. Use :code:`numactl -C 0 ./testCholesky` to run the process on a single core, (only core 0 is accessible on WSL), and then use :code:`top` to verify that this is happening. WSL apparently only uses a single core, but I did manage to see 200% CPU usage without any of the above measures (for a machine with 2 physical cores). 
+Intel MKL uses as many threads as there are physical cores on a machine by default. This behaviour can be controlled by setting :code:`MKL_NUM_THREADS` or :code:`OMP_NUM_THREADS`, read by MKL in that order, or by tying down the process to specific cores on a machine. :code:`numactl` allows you to do the latter. Use :code:`numactl -C 0 ./testCholesky` to run the process on a single core, (only core 0 is accessible on WSL), and then use :code:`top` to verify that this is happening. WSL apparently only uses a single core, but I did manage to see 200% CPU usage without any of the above measures (for a machine with 2 physical cores).  
+
+*****************************
+Compiler options
+*****************************
+
+Compiler options can make quite a difference in the speed (as well as size and behaviour) of the code. :code:`-O2` is the highest level of optimization you can request without sacrificing safety of the code. Going from :code:`-O2` to :code:`-O3` shows very little gain in speed, but adding :code:`-ffast-math` (which turns on :code:`-O3`)does improve the speed noticeably. However, this comes at a cost.  
+
+.. image:: images/cpp-compileroptions.png
+    :width: 800px
+    :align: center
+    :alt: alternate text
+
+:code:`-ffast-math` essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see section on Selective Optimizations) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler play wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the :code:`-ffast-math` code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it. 
+
+.. image:: images/cpp-compileroptions-safety-speed.png
+    :width: 800px
+    :align: center
+    :alt: alternate text
+
+*****************************
+Best case limits for SIMD
+*****************************
+
+Both Intel and ARM provide information on latency and throughput of each of their SIMD instructions. See for example, here, a screenshot of the Intel intrinsics guide. 
+
+.. image:: images/cpp-assemblyguide.png
+    :width: 800px
+    :align: center
+    :alt: alternate text
+
+Looking these numbers up is a good way to choose between instructions and also determine whether or not it is worth coding up an intrinsics/assembly version of your code. For example, if the instruction you need is not available, and you have to use multiple instructions to get your work done, it may not actually speed up your code. You may have to redesign your algorithm.
+
+************************************
+Debugging auto generated assembly
+************************************
+
+Sometimes, you write intrinsics and you don't get the expected speedup. In such cases, it could be that the compiler is not generating the assembly code you were hoping for. You can look at the disassembly and find out if this is the case. For example, this is the disassembly for add_avx function compiled with GCC 4.9 and GCC 5.4. GCC 5.4 unrolled the loop, whereas GCC 4.9 didn't, hence the same code compiled with GCC 4.9 was slower. 
+
+.. image:: images/cpp-debugging-assembly.png
+    :width: 800px
+    :align: center
+    :alt: alternate text
+
+Of course, it's always best to upgrade to a newer compiler, if you have the freedom to do so. If you can't change the compiler, then you may want to just write the assembly yourself (rather than use intrinsics), but if you have sufficient knowledge to write the assembly, you can get away by copying the assembly from the disassembly and then modifying it to use correct registers and so on. This would allow you to bypass the compiler asm doing the wrong conversion from intrinsics to assembly.
 
 *****************************
 Selective optimizations
@@ -61,7 +105,7 @@ GCC provides :code:`pragma` to selectively optimize a function, i.e. change the 
     }
     #pragma GCC pop_options
 
-WSL does not report the existance of AVX2 and a few other variants of Intel instruction sets via :code:`cat /proc/cpuinfo`, so you would need to check the Intel processor specifications to determine whether a particular instruction set is available. 
+WSL does not report the existance of AVX2 and a few other variants of Intel instruction sets via :code:`cat /proc/cpuinfo`, so you would need to check the Intel processor specifications to determine whether a particular instruction set is available.
 
 *****************************
 References

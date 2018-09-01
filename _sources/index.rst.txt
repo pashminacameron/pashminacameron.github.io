@@ -3,14 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Pashmina Cameron's Blog
-=============================================
+Pashmina's Blog
+=============================
 
-
-
-Information related to  RSE 2018 talk  *Fast code with just enough effort* is available at :download:`pdf <docs/RSE2018Talk.pdf>`. 
-
+RSE 2018 talk  *Fast code with just enough effort*: :download:`pdf <docs/RSE2018Talk.pdf>`. 
 An extended version is also available: :download:`pdf <docs/RSE2018Talk_extended.pdf>`
+
+Further analysis can be found at:
 
  - :ref:`python` 
  - :ref:`cpp`
@@ -18,7 +17,6 @@ An extended version is also available: :download:`pdf <docs/RSE2018Talk_extended
 
 .. postlist:: 0
    :excerpts:
-
 
 
 .. `toctree` directive, below, contains list of non-post `.rst` files.
