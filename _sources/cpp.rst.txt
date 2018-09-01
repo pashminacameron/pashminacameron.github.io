@@ -38,7 +38,7 @@ We use LAPACK, Eigen and CUDA implementations to set ourselves a target, rather 
 **********************
 Conclusion
 **********************
-- Without changing the basic Cholesky algorithm (i.e. using more efficient block-wise or recursive algorithms), SIMD instructions (AVX and higher) provide the best performance. After this point, speed gains can only be made using better algorithms. Similar perfomance may be achieved without writing SIMD intrinsics, by using :code:`-ffast-math` instead, but see the section on Compiler options for a discussion of the cost involved in going down this route. 
+- Without changing the basic Cholesky algorithm (i.e. using more efficient block-wise or recursive algorithms), SIMD instructions (AVX and higher) provide the best performance. After this point, speed gains can only be made using better algorithms. Similar perfomance may be achieved without writing SIMD intrinsics, by using :code:`-ffast-math` instead, but see :ref:`compiler_opt` for a discussion of the cost involved in going down this route. 
 - Single threaded BLAS routines plugged in place of hand-written intrinsics show similar performance, suggesting that the handwritten intrinsics are optimal. 
 - Eigen is great for small fixed-size matrices. Eigen (without MKL) has efficient linear algebra algorithms. Use them where you can. 
 - LAPACK, as expected provide the best performance on CPU-only sytems. LAPACK achieves it's performance from a combination of SIMD instructions, efficient data layout and efficient algorithms. LAPACK uses multiple threads if possible, and that can further boost performance. Similar speed gains can be made by using multiple threads for C++ or AVX code. 
@@ -56,6 +56,8 @@ numactl
 
 Intel MKL uses as many threads as there are physical cores on a machine by default. This behaviour can be controlled by setting :code:`MKL_NUM_THREADS` or :code:`OMP_NUM_THREADS`, read by MKL in that order, or by tying down the process to specific cores on a machine. :code:`numactl` allows you to do the latter. Use :code:`numactl -C 0 ./testCholesky` to run the process on a single core, (only core 0 is accessible on WSL), and then use :code:`top` to verify that this is happening. WSL apparently only uses a single core, but I did manage to see 200% CPU usage without any of the above measures (for a machine with 2 physical cores).  
 
+.. _compiler_opt: 
+
 *****************************
 Compiler options
 *****************************
@@ -67,7 +69,7 @@ Compiler options can make quite a difference in the speed (as well as size and b
     :align: center
     :alt: alternate text
 
-:code:`-ffast-math` essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see section on Selective Optimizations) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler play wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the :code:`-ffast-math` code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it. 
+:code:`-ffast-math` essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see :ref:`selective_opt`) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler play wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the :code:`-ffast-math` code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it. 
 
 .. image:: images/cpp-compileroptions-safety-speed.png
     :width: 800px
@@ -102,10 +104,12 @@ Of course, it's always best to upgrade to a newer compiler, if you have the free
 
 Handwritten intrinsics generally produce much more compact assembly code. Compiler's auto-vectorized code contains a lot of no-ops and jumps. For example, the pairwise product AVX function in Cholesky example lead to 40 lines of assembly, whereas the C++ -O3 version lead to 220 lines of assembly. The more assembly there is, the harder it is to debug!
 
+.. _selective_opt:
+
 *****************************
 Selective optimizations
 *****************************
-GCC provides :code:`pragma` to selectively optimize a function, i.e. change the compiler flags for a single function at a time. The compile string does not show the actual flags used as those are only printed on a per file basis when calling cmake or make. These flags are, therefore invisible, and hence a little dangerous, but the option is there, should you want to change compiler flags for selected functions. A better way of doing this may be to move code that needs to be optimized to a separate file and changing the compiler flags for just that file. That way the flags will be available for inspection (while allowing the benefit of optimization without polluting other compilation units). 
+GCC provides a :code:`pragma` to selectively optimize a function, i.e. change the compiler flags for a single function at a time. The compile string does not show the actual flags used as those are only printed on a per file basis when calling cmake or make. These flags are, therefore invisible, and hence a little dangerous, but the option is there, should you want to change compiler flags for selected functions. A better way of doing this may be to move code that needs to be optimized to a separate file and changing the compiler flags for just that file. That way the flags will be available for inspection (while allowing the benefit of optimization without polluting other compilation units). 
 
 .. code-block:: guess
 

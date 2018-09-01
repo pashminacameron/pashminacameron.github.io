@@ -11,8 +11,14 @@ An extended version is also available: :download:`pdf <docs/RSE2018Talk_extended
 
 Further analysis can be found at:
 
- - :ref:`python` 
+ - :ref:`python`
  - :ref:`cpp`
+
+ In future, we may look at 
+
+ - effect of cache sizes and cache misses
+ - ARM assembly starter examples
+ - custom hardware accelerators
 
 
 .. postlist:: 0

@@ -1,0 +1,11 @@
+
+.. Optimization blog index file, created by `ablog start` on Sun Jul 29 12:23:17 2018.
+
+Optimization
+=============================
+
+RSE 2018 talk  *Fast code with just enough effort*: :download:`pdf <docs/RSE2018Talk.pdf>`. 
+An extended version is also available: :download:`pdf <docs/RSE2018Talk_extended.pdf>`
+
+Further analysis for Python is at :ref:`python`  and C++ at :ref:`cpp`
+
