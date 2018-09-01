@@ -7,7 +7,6 @@ Pashmina's Blog
 =============================
 
 RSE 2018 talk  *Fast code with just enough effort*: :download:`pdf <docs/RSE2018Talk.pdf>`. 
-An extended version is also available: :download:`pdf <docs/RSE2018Talk_extended.pdf>`
 
 Further analysis can be found at:
 
