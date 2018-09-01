@@ -35,6 +35,16 @@ We use LAPACK, Eigen and CUDA implementations to set ourselves a target, rather 
     :align: center
     :alt: alternate text
 
+**********************
+Conclusion
+**********************
+- Without changing the basic Cholesky algorithm (i.e. using more efficient block-wise or recursive algorithms), SIMD instructions (AVX and higher) provide the best performance. After this point, speed gains can only be made using better algorithms. Similar perfomance may be achieved without writing SIMD intrinsics, by using :code:`-ffast-math` instead, but see the section on Compiler options for a discussion of the cost involved in going down this route. 
+- Single threaded BLAS routines plugged in place of hand-written intrinsics show similar performance, suggesting that the handwritten intrinsics are optimal. 
+- Eigen is great for small fixed-size matrices. Eigen (without MKL) has efficient linear algebra algorithms. Use them where you can. 
+- LAPACK, as expected provide the best performance on CPU-only sytems. LAPACK achieves it's performance from a combination of SIMD instructions, efficient data layout and efficient algorithms. LAPACK uses multiple threads if possible, and that can further boost performance. Similar speed gains can be made by using multiple threads for C++ or AVX code. 
+- If you have access to a GPU, CUDA gives the best performance at large matrix sizes. A large fraction of the time is spent in data transfer, so it is worth chaining operations in order to minimize the trips to/from GPU. 
+
+
 *************
 Turbo Boost
 *************
@@ -89,6 +99,8 @@ Sometimes, you write intrinsics and you don't get the expected speedup. In such 
     :alt: alternate text
 
 Of course, it's always best to upgrade to a newer compiler, if you have the freedom to do so. If you can't change the compiler, then you may want to just write the assembly yourself (rather than use intrinsics), but if you have sufficient knowledge to write the assembly, you can get away by copying the assembly from the disassembly and then modifying it to use correct registers and so on. This would allow you to bypass the compiler asm doing the wrong conversion from intrinsics to assembly.
+
+Handwritten intrinsics generally produce much more compact assembly code. Compiler's auto-vectorized code contains a lot of no-ops and jumps. For example, the pairwise product AVX function in Cholesky example lead to 40 lines of assembly, whereas the C++ -O3 version lead to 220 lines of assembly. The more assembly there is, the harder it is to debug!
 
 *****************************
 Selective optimizations

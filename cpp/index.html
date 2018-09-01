@@ -180,6 +180,16 @@
 <p>We use LAPACK, Eigen and CUDA implementations to set ourselves a target, rather than to evaluate them. The aim here is to see how far we can go from a pure C++ implementation to AVX one.</p>
 <a class="reference internal image-reference" href="../_images/cpp-graphs.png"><img alt="alternate text" class="align-center" src="../_images/cpp-graphs.png" style="width: 800px;" /></a>
 </div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Without changing the basic Cholesky algorithm (i.e. using more efficient block-wise or recursive algorithms), SIMD instructions (AVX and higher) provide the best performance. After this point, speed gains can only be made using better algorithms. Similar perfomance may be achieved without writing SIMD intrinsics, by using <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> instead, but see the section on Compiler options for a discussion of the cost involved in going down this route.</li>
+<li>Single threaded BLAS routines plugged in place of hand-written intrinsics show similar performance, suggesting that the handwritten intrinsics are optimal.</li>
+<li>Eigen is great for small fixed-size matrices. Eigen (without MKL) has efficient linear algebra algorithms. Use them where you can.</li>
+<li>LAPACK, as expected provide the best performance on CPU-only sytems. LAPACK achieves it’s performance from a combination of SIMD instructions, efficient data layout and efficient algorithms. LAPACK uses multiple threads if possible, and that can further boost performance. Similar speed gains can be made by using multiple threads for C++ or AVX code.</li>
+<li>If you have access to a GPU, CUDA gives the best performance at large matrix sizes. A large fraction of the time is spent in data transfer, so it is worth chaining operations in order to minimize the trips to/from GPU.</li>
+</ul>
+</div>
 <div class="section" id="turbo-boost">
 <h2>Turbo Boost<a class="headerlink" href="#turbo-boost" title="Permalink to this headline">¶</a></h2>
 <p>Turbo Boost was disabled by following instructions <a class="reference external" href="https://www.tautvidas.com/blog/2011/04/disabling-intel-turbo-boost/">here</a>. With Turbo Boost enabled  (which is the default), timings are not consistent because the CPU clock frequency changes (as per temperature of the machine). Anaconda uses Intel MKL and I have not tested this on an ARM processor. All timings were taken in Ubuntu 18.04 (Windows Subsystem for Linux). To verify that Turbo Boost is off, you may find it useful to download Intel extreme tuning utility and check that the Max Core Frequency stays roughly constant when running benchmarks.</p>
@@ -206,6 +216,7 @@
 <p>Sometimes, you write intrinsics and you don’t get the expected speedup. In such cases, it could be that the compiler is not generating the assembly code you were hoping for. You can look at the disassembly and find out if this is the case. For example, this is the disassembly for add_avx function compiled with GCC 4.9 and GCC 5.4. GCC 5.4 unrolled the loop, whereas GCC 4.9 didn’t, hence the same code compiled with GCC 4.9 was slower.</p>
 <a class="reference internal image-reference" href="../_images/cpp-debugging-assembly.png"><img alt="alternate text" class="align-center" src="../_images/cpp-debugging-assembly.png" style="width: 800px;" /></a>
 <p>Of course, it’s always best to upgrade to a newer compiler, if you have the freedom to do so. If you can’t change the compiler, then you may want to just write the assembly yourself (rather than use intrinsics), but if you have sufficient knowledge to write the assembly, you can get away by copying the assembly from the disassembly and then modifying it to use correct registers and so on. This would allow you to bypass the compiler asm doing the wrong conversion from intrinsics to assembly.</p>
+<p>Handwritten intrinsics generally produce much more compact assembly code. Compiler’s auto-vectorized code contains a lot of no-ops and jumps. For example, the pairwise product AVX function in Cholesky example lead to 40 lines of assembly, whereas the C++ -O3 version lead to 220 lines of assembly. The more assembly there is, the harder it is to debug!</p>
 </div>
 <div class="section" id="selective-optimizations">
 <h2>Selective optimizations<a class="headerlink" href="#selective-optimizations" title="Permalink to this headline">¶</a></h2>
