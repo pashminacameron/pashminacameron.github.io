@@ -26,10 +26,12 @@ each of these players has taken.
 What can you do with an FPGA?
 *****************************
 
-Modern FPGAs are a mixture of hard IP, which are somewhat general purpose
-components, such as memory or arithmetic units, combined with Logic Gate
-arrays in which you can implement general digital circuits.  This combination
-allows for much better speed, space and power efficiency.
+Modern FPGAs are a mixture of 
+
+* Hard IP (not reprogrammable): which are somewhat general purpose components, such as memory or arithmetic units 
+* Soft IP (reprogrammable): such as Logic Gate arrays in which you can implement general digital circuits 
+
+This combination allows for much better speed, space and power efficiency.
 
 The main advantages over Domain Specific Architectures are:
 
@@ -39,7 +41,7 @@ The main advantages over Domain Specific Architectures are:
 
 * Flexiblity as your requirements change.  This leads to very fast turn around.
   FPGAs are suited for approaches such as agile development that are not
-  possible when timescales to do a new Silica manufacture run are involved.
+  possible when timescales to do make a new chip are involved. Simply reprogramming the FPGA is sufficient. 
 
 **********************
 Programming an FPGA

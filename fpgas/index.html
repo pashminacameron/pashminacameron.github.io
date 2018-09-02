@@ -176,10 +176,12 @@ on their usage as compute accelerators:</p>
 each of these players has taken.</p>
 <div class="section" id="what-can-you-do-with-an-fpga">
 <h2>What can you do with an FPGA?<a class="headerlink" href="#what-can-you-do-with-an-fpga" title="Permalink to this headline">¶</a></h2>
-<p>Modern FPGAs are a mixture of hard IP, which are somewhat general purpose
-components, such as memory or arithmetic units, combined with Logic Gate
-arrays in which you can implement general digital circuits.  This combination
-allows for much better speed, space and power efficiency.</p>
+<p>Modern FPGAs are a mixture of</p>
+<ul class="simple">
+<li>Hard IP (not reprogrammable): which are somewhat general purpose components, such as memory or arithmetic units</li>
+<li>Soft IP (reprogrammable): such as Logic Gate arrays in which you can implement general digital circuits</li>
+</ul>
+<p>This combination allows for much better speed, space and power efficiency.</p>
 <p>The main advantages over Domain Specific Architectures are:</p>
 <ul class="simple">
 <li>Enabling compute on demand as the cost of the FPGA hardware can be shared by
@@ -187,7 +189,7 @@ a large number of different applications.  Hence we get the rapid scale up
 options in the cloud that we are used to for CPU instances.</li>
 <li>Flexiblity as your requirements change.  This leads to very fast turn around.
 FPGAs are suited for approaches such as agile development that are not
-possible when timescales to do a new Silica manufacture run are involved.</li>
+possible when timescales to do make a new chip are involved. Simply reprogramming the FPGA is sufficient.</li>
 </ul>
 </div>
 <div class="section" id="programming-an-fpga">
