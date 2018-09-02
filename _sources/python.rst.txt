@@ -8,7 +8,7 @@
 Optimizing Python
 ====================
 
-Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at `cholesky_benchmarking <github.com/pashminacameron/cholesky_benchmarking>`_ Github repo. For scikit-cuda, we used the example code from the documentation. 
+Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at `optimization_examples <github.com/pashminacameron/optimization_examples>`_ Github repo. For scikit-cuda, we used the example code from the documentation. 
 
 ************
 Profiling

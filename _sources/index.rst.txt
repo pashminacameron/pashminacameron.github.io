@@ -6,18 +6,21 @@
 Pashmina's Blog
 =============================
 
-RSE 2018 talk  *Fast code with just enough effort*: :download:`pdf <docs/RSE2018Talk.pdf>`. 
+**Fast code with just enough effort**
+UK RSE 2018 talk :download:`pdf <docs/RSE2018Talk.pdf>`. 
+
+Github repo that contains accompanying code is at `optimization_examples <github.com/pashminacameron/optimization_examples>`_.
 
 Further analysis can be found at:
 
  - :ref:`python`
  - :ref:`cpp`
 
- Additional information on hardware accelerators may be found at:
+Additional information on hardware accelerators may be found at:
 
  - :ref:`heterogenous`
    
- In future, we may look at 
+In future, we may look at 
 
  - effect of cache sizes and cache misses
  - ARM assembly starter examples
