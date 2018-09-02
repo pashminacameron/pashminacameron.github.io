@@ -16,9 +16,9 @@
       <name>Pashmina Cameron</name>
     </author>
     <content type="html">&lt;p&gt;Graphics processing units were one of the earliest forms of accelerator put
-to general purpose uses.  Initially this was entirely done by using / missusing
-the graphics processing pipelines.   This limited what could be done and lead
-to some very creative algorithms to make progress under these limitations.&lt;/p&gt;
+to general purpose use.  Initially this was entirely done by using / missusing
+the graphics processing pipelines. This limited what could be done and lead
+to some very creative algorithms (and incredibly capable programmers) to make progress under these limitations.&lt;/p&gt;
 </content>
   </entry>
   <entry xml:base="True/blog/atom.xml">
@@ -33,8 +33,8 @@ to some very creative algorithms to make progress under these limitations.&lt;/p
     <content type="html">&lt;p&gt;We will use the term FPGA to cover the class of programmable hardware
 which can be used to implement almost any digital circuit at runtime.
 This means that the hardware architecture can be optimized to the precise
-use case, allowing flexibility like variable precision and vector width
-across the pipeline and massive amounts of controlled parallism.&lt;/p&gt;
+use case, allowing flexibility around variable precision and vector width
+across the pipeline and massive amounts of controlled parallelism.&lt;/p&gt;
 </content>
   </entry>
   <entry xml:base="True/blog/atom.xml">
@@ -47,7 +47,7 @@ across the pipeline and massive amounts of controlled parallism.&lt;/p&gt;
       <name>Pashmina Cameron</name>
     </author>
     <content type="html">&lt;p&gt;Certain applications have sufficient demand to lead to the ultimate optmization
-technique - designing hardware targetted at that one application.
+technique - designing hardware targeted at that one application.
 Examples of this include:&lt;/p&gt;
 </content>
   </entry>
@@ -60,7 +60,7 @@ Examples of this include:&lt;/p&gt;
     <author>
       <name>Pashmina Cameron</name>
     </author>
-    <content type="html">&lt;p&gt;Whilst DSPs are mostly found in mobile platforms, they are an important for
+    <content type="html">&lt;p&gt;Whilst DSPs are mostly found in mobile platforms, they are an important form
 of accelerator.&lt;/p&gt;
 </content>
   </entry>
@@ -73,10 +73,10 @@ of accelerator.&lt;/p&gt;
     <author>
       <name>Pashmina Cameron</name>
     </author>
-    <content type="html">&lt;p&gt;As we reach the end of Moore’s (CPU performance double every 2 years) and
+    <content type="html">&lt;p&gt;As we reach the end of Moore’s law (CPU performance doubles every 2 years) and
 Dennard scaling (as transistors get smaller their power density remains
 constant - so each transistor uses less power), the focus of computer
-architecture has move towards Heterogenous computing.&lt;/p&gt;
+architecture has moved towards Heterogenous computing.&lt;/p&gt;
 </content>
   </entry>
   <entry xml:base="True/blog/atom.xml">

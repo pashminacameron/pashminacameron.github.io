@@ -6,27 +6,30 @@
 Digital Signal Processors (DSPs)
 ================================
 
-Whilst DSPs are mostly found in mobile platforms, they are an important for
+Whilst DSPs are mostly found in mobile platforms, they are an important form
 of accelerator.
 
-They are a processor typically made up of a number of parallel special
+A DSP is typically made up of a number of parallel special
 purpose blocks and are most useful in applications where a large number
 of mathematical operations need to be performed quickly and repeatedly on
 a data series.  Whilst they were originally designed to handle typical
 analog data flows in activities such as wireless transmission and audio they
-are very efficient at operations that are common in AI such as convolution.
+are very efficient at operations that are the building blocks of most AI 
+processing pipelines such as convolution.
 
-There are specialist forms forms of DSP for individual markets:
+There are specialist forms of DSP for individual markets:
 
 * Video processing
 * Audio processing
 * Neural networks
 
 However, DSP elements are most frequently found inside SoCs or as hard
-IP with an FPGA.
+IP with an FPGA. See also:
 
-* Qualcomm's SnapDragon mobile processors to provide AI services. `Qualcomm Neural Processing SDK <https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk>`_
+* Qualcomm's SnapDragon mobile processors to provide AI services. 
+`Qualcomm Neural Processing SDK <https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk>`_
 
-* Visual Processing for automotive applications. `Cadence VisionC5 <https://www.cadence.com/content/cadence-www/global/en_US/home/company/newsroom/press-releases/pr/2017/cadence-unveils-industrys-first-neural-network-dsp-ip-for-automo.html>`_
+* Visual Processing for automotive applications. 
+`Cadence VisionC5 <https://www.cadence.com/content/cadence-www/global/en_US/home/company/newsroom/press-releases/pr/2017/cadence-unveils-industrys-first-neural-network-dsp-ip-for-automo.html>`_
 
 

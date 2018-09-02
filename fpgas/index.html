@@ -164,13 +164,13 @@
 <p>We will use the term FPGA to cover the class of programmable hardware
 which can be used to implement almost any digital circuit at runtime.
 This means that the hardware architecture can be optimized to the precise
-use case, allowing flexibility like variable precision and vector width
-across the pipeline and massive amounts of controlled parallism.</p>
+use case, allowing flexibility around variable precision and vector width
+across the pipeline and massive amounts of controlled parallelism.</p>
 <p>There are two major manufacturers of FPGAs who are both focussing heavily
-on their useage as compute accelerators.</p>
+on their usage as compute accelerators:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://www.xilinx.com">http://www.xilinx.com</a></li>
-<li><a class="reference external" href="http://www.altera.com">http://www.altera.com</a> (now part of Intel)</li>
+<li><a class="reference external" href="http://www.xilinx.com">Xilinx</a></li>
+<li><a class="reference external" href="http://www.altera.com">Altera</a> (now part of Intel)</li>
 </ul>
 <p>As you will see much of the following divides into the different approaches
 each of these players has taken.</p>
@@ -187,11 +187,11 @@ a large number of different applications.  Hence we get the rapid scale up
 options in the cloud that we are used to for CPU instances.</li>
 <li>Flexiblity as your requirements change.  This leads to very fast turn around.
 FPGAs are suited for approaches such as agile development that are not
-possible when timescales to burn a chip are involved.</li>
+possible when timescales to do a new Silica manufacture run are involved.</li>
 </ul>
 </div>
-<div class="section" id="how-to-program-an-fpga">
-<h2>How to program an FPGA<a class="headerlink" href="#how-to-program-an-fpga" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="programming-an-fpga">
+<h2>Programming an FPGA<a class="headerlink" href="#programming-an-fpga" title="Permalink to this headline">¶</a></h2>
 <p>FPGAs have traditionally been programmed using hardware description languages
 such as <a class="reference external" href="https://en.wikipedia.org/wiki/Verilog">Verilog</a> and
 <a class="reference external" href="https://en.wikipedia.org/wiki/VHDL">VHDL</a>.
@@ -226,20 +226,21 @@ we will focus on those</p>
 <div class="section" id="cpu-integrated-fpgas">
 <h3>CPU integrated FPGAs<a class="headerlink" href="#cpu-integrated-fpgas" title="Permalink to this headline">¶</a></h3>
 <p>Intel has annouced a variant of the Xeon CPU that includes, in package
-a large FPGA.</p>
-<blockquote>
-<div><a class="reference external" href="https://www.nextplatform.com/2018/05/24/a-peek-inside-that-intel-xeon-fpga-hybrid-chip/">https://www.nextplatform.com/2018/05/24/a-peek-inside-that-intel-xeon-fpga-hybrid-chip/</a></div></blockquote>
+a large FPGA. See
+<a class="reference external" href="https://www.nextplatform.com/2018/05/24/a-peek-inside-that-intel-xeon-fpga-hybrid-chip/">Intel Xeon FPGA Hybrid cip</a>.</p>
 <p>Xilinx has a range of products integrating CPUs directly within the FPGA
-and provides good support for running Linux on these.</p>
-<blockquote>
-<div><a class="reference external" href="https://www.xilinx.com/products/silicon-devices/soc/zynq-ultrascale-mpsoc.html">https://www.xilinx.com/products/silicon-devices/soc/zynq-ultrascale-mpsoc.html</a></div></blockquote>
+and provides good support for running Linux on these. See
+<a class="reference external" href="https://www.xilinx.com/products/silicon-devices/soc/zynq-ultrascale-mpsoc.html">Xilinx Ultrascale MPSOC</a>.</p>
 </div>
 <div class="section" id="expansion-bus-connected-accelerators">
 <h3>Expansion bus connected accelerators<a class="headerlink" href="#expansion-bus-connected-accelerators" title="Permalink to this headline">¶</a></h3>
 <p>Currently most FPGA accelerators are attached to normal servers via the PCIe
 bus at Gen 3.0 speeds. All the major devices are available in this form factor.
 Gen 4.0 PCIe devices are starting to become available.</p>
-<p>Emerging interconnect options such <a class="reference external" href="https://www.intel.com/content/www/us/en/io/quickpath-technology/quickpath-technology-general.html">Intel QPI</a>, <a class="reference external" href="https://opencapi.org/">OpenCAPI 2.0</a> and <a class="reference external" href="https://www.ccixconsortium.com/">CCIX</a>.  All these allow for coherent caches with the CPUs greatly accelerating some types of applications.</p>
+<p>Emerging interconnect options such as
+<a class="reference external" href="https://www.intel.com/content/www/us/en/io/quickpath-technology/quickpath-technology-general.html">Intel QPI</a>,
+<a class="reference external" href="https://opencapi.org/">OpenCAPI 2.0</a> and <a class="reference external" href="https://www.ccixconsortium.com/">CCIX</a>
+allow for coherent caches with the CPUs, greatly accelerating some types of applications.</p>
 </div>
 <div class="section" id="example-systems-usecases">
 <h3>Example Systems / Usecases<a class="headerlink" href="#example-systems-usecases" title="Permalink to this headline">¶</a></h3>
