@@ -71,6 +71,8 @@ Compiler options can make quite a difference in the speed (as well as size and b
 
 :code:`-ffast-math` essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see :ref:`selective_opt`) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler play wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the :code:`-ffast-math` code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it. 
 
+If it was possible to use :code:`-ffast-math` only at compile time and not at link time, then we could get the speedup for a single compilation unit (if we know that it is acceptable to turn on unsafe math optimizations for that part of the code) and not have any negative implications on any downstream dependencies. However, this is not currently possible with GCC (a bug report is under discussion) at the moment as ``CCFLAGS`` are automatically picked up by the linker when using GCC to link. Using ld to link circumvents this issue but that is `hard`.
+
 .. image:: images/cpp-compileroptions-safety-speed.png
     :width: 800px
     :align: center
