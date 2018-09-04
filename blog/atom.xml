@@ -88,7 +88,7 @@ architecture has moved towards Heterogenous computing.&lt;/p&gt;
     <author>
       <name>Pashmina Cameron</name>
     </author>
-    <content type="html">&lt;p&gt;Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at &lt;a class=&quot;reference external&quot; href=&quot;github.com/pashminacameron/optimization_examples&quot;&gt;optimization_examples&lt;/a&gt; Github repo. For scikit-cuda, we used the example code from the documentation.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at &lt;a class=&quot;reference external&quot; href=&quot;https://www.github.com/pashminacameron/optimization_examples&quot;&gt;optimization_examples&lt;/a&gt; Github repo. For scikit-cuda, we used the example code from the documentation.&lt;/p&gt;
 </content>
   </entry>
   <entry xml:base="True/blog/atom.xml">
