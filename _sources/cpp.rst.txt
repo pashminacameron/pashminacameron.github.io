@@ -10,7 +10,7 @@ Optimizing C++
 
 Discussion on Cholesky decomposition in C++
 
-We used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which we outline where they exist. All code used in these examples is available at `optimization_examples <github.com/pashminacameron/optimization_examples>`_ Github repo. For CUDA, we used the shipped NVIDIA examples, modified to use single precision floats for consistency. 
+We used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which we outline where they exist. All code used in these examples is available at `optimization_examples <https://www.github.com/pashminacameron/optimization_examples>`_ Github repo. For CUDA, we used the shipped NVIDIA examples, modified to use single precision floats for consistency. 
 
 *****************
 Algorithm choice

@@ -162,7 +162,7 @@
   <div class="section" id="optimizing-c">
 <h1>Optimizing C++<a class="headerlink" href="#optimizing-c" title="Permalink to this headline">¶</a></h1>
 <p>Discussion on Cholesky decomposition in C++</p>
-<p>We used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which we outline where they exist. All code used in these examples is available at <a class="reference external" href="github.com/pashminacameron/optimization_examples">optimization_examples</a> Github repo. For CUDA, we used the shipped NVIDIA examples, modified to use single precision floats for consistency.</p>
+<p>We used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which we outline where they exist. All code used in these examples is available at <a class="reference external" href="https://www.github.com/pashminacameron/optimization_examples">optimization_examples</a> Github repo. For CUDA, we used the shipped NVIDIA examples, modified to use single precision floats for consistency.</p>
 <div class="section" id="algorithm-choice">
 <h2>Algorithm choice<a class="headerlink" href="#algorithm-choice" title="Permalink to this headline">¶</a></h2>
 <p>There are two variants of Cholesky decomposition: <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> and <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code>. We use the <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> variant here, except where outlined, to compare it to <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code> variant.</p>
