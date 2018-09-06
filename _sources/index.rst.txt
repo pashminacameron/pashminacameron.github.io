@@ -24,7 +24,8 @@ In future, we may look at
 
  - effect of cache sizes and cache misses
  - ARM assembly starter examples
-
+ - AVX-512 assembly starter examples
+ - comparison with Julia
 
 .. postlist:: 0
    :excerpts:

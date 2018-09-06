@@ -206,6 +206,20 @@
 <p>If it was possible to use <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> only at compile time and not at link time, then we could get the speedup for a single compilation unit (if we know that it is acceptable to turn on unsafe math optimizations for that part of the code) and not have any negative implications on any downstream dependencies. However, this is not currently possible with GCC (a bug report is under discussion) at the moment as <code class="docutils literal notranslate"><span class="pre">CCFLAGS</span></code> are automatically picked up by the linker when using GCC to link. Using ld to link circumvents this issue but that is <cite>hard</cite>.</p>
 <a class="reference internal image-reference" href="../_images/cpp-compileroptions-safety-speed.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compileroptions-safety-speed.png" style="width: 800px;" /></a>
 </div>
+<div class="section" id="compiler-version">
+<h2>Compiler version<a class="headerlink" href="#compiler-version" title="Permalink to this headline">¶</a></h2>
+<p>Off late, GCC has got a lot better at aut-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation:</p>
+<a class="reference internal image-reference" href="../_images/cpp-compilers-comparison.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compilers-comparison.png" style="width: 800px;" /></a>
+<p>Comparison of AVX implementations for same GCC versions:</p>
+<a class="reference internal image-reference" href="../_images/cpp-avx-compilers-comparison.png"><img alt="alternate text" class="align-center" src="../_images/cpp-avx-compilers-comparison.png" style="width: 800px;" /></a>
+<p>Putting it all together:</p>
+<a class="reference internal image-reference" href="../_images/cpp-avx-compilers-comparison-all.png"><img alt="alternate text" class="align-center" src="../_images/cpp-avx-compilers-comparison-all.png" style="width: 800px;" /></a>
+<p>Takeaways:</p>
+<ul class="simple">
+<li>Auto-vectorization has got better, and is especially noticeable at matrix sizes between 64-256.</li>
+<li>C++ with auto-vectorization is closer to AVX from GCC 6 onwards. All C++ lines are with <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> flag. Without it, the results are worse.</li>
+</ul>
+</div>
 <div class="section" id="best-case-limits-for-simd">
 <h2>Best case limits for SIMD<a class="headerlink" href="#best-case-limits-for-simd" title="Permalink to this headline">¶</a></h2>
 <p>Both Intel and ARM provide information on latency and throughput of each of their SIMD instructions. See for example, here, a screenshot of the Intel intrinsics guide.</p>

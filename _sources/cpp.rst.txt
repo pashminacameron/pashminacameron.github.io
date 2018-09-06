@@ -79,6 +79,36 @@ If it was possible to use :code:`-ffast-math` only at compile time and not at li
     :alt: alternate text
 
 *****************************
+Compiler version
+*****************************
+
+Off late, GCC has got a lot better at aut-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation: 
+
+.. image:: images/cpp-compilers-comparison.png
+    :width: 800px
+    :align: center
+    :alt: alternate text
+
+Comparison of AVX implementations for same GCC versions: 
+
+.. image:: images/cpp-avx-compilers-comparison.png
+    :width: 800px
+    :align: center
+    :alt: alternate text
+
+Putting it all together: 
+
+.. image:: images/cpp-avx-compilers-comparison-all.png
+    :width: 800px
+    :align: center
+    :alt: alternate text
+
+Takeaways:
+
+- Auto-vectorization has got better, and is especially noticeable at matrix sizes between 64-256. 
+- C++ with auto-vectorization is closer to AVX from GCC 6 onwards. All C++ lines are with :code:`-ffast-math` flag. Without it, the results are worse.
+
+*****************************
 Best case limits for SIMD
 *****************************
 
