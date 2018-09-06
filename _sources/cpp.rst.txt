@@ -82,7 +82,7 @@ If it was possible to use :code:`-ffast-math` only at compile time and not at li
 Compiler version
 *****************************
 
-Off late, GCC has got a lot better at aut-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation: 
+Off late, GCC has got a lot better at auto-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation: 
 
 .. image:: images/cpp-compilers-comparison.png
     :width: 800px
