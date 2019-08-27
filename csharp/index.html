@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Graphics Processing Units (GPUs) &mdash; Pashmina&#39;s blog  documentation</title>
+  <title>C# &mdash; Pashmina&#39;s blog  documentation</title>
   
 
   
@@ -140,13 +140,13 @@
     
       <li><a href="../">Docs</a> &raquo;</li>
         
-      <li>Graphics Processing Units (GPUs)</li>
+      <li>C#</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/gpus.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/csharp.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -159,50 +159,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="graphics-processing-units-gpus">
-<span id="gpu-label"></span><h1>Graphics Processing Units (GPUs)<a class="headerlink" href="#graphics-processing-units-gpus" title="Permalink to this headline">¶</a></h1>
-<p>Graphics processing units were one of the earliest forms of accelerator put
-to general purpose use.  Initially this was entirely done by using / missusing
-the graphics processing pipelines. This limited what could be done and lead
-to some very creative algorithms (and incredibly capable programmers) to make progress under these limitations.</p>
-<p>As graphics processors became more programmable (Vertex and Pixel Shaders) it
-became possible to accelerate wider classes of algorithms, but this was still
-a specialist field. The gains were sometimes huge, but the learning curve
-was extremely steep. See <a class="reference external" href="https://developer.nvidia.com/gpugems/GPUGems2/gpugems2_part04.html">GPU Gems 2</a>  (that predated CUDA by 2 years)</p>
-<p>More recently, a trend led primarily by NVIDIA has been the move to
-General Purpose GPU (GPGPU) architectures in which hardware features have
-been added to the chips specifically to make them suitable for use in more
-general environments. This makes them more widely suited to applications that involve
-doing the same operations on a large amount of data in parallel.</p>
-<p>Accompanying software development kits such as <a class="reference external" href="https://developer.nvidia.com/cuda-zone">CUDA</a>
-and <a class="reference external" href="https://www.khronos.org/opencl/">OpenCL</a> have
-exposed these features in a much more programmer-friendly way, making it easier
-for programmers to leverage the capabilities of GPUs.</p>
-<div class="section" id="gpgpu-focused-features">
-<h2>GPGPU focused features<a class="headerlink" href="#gpgpu-focused-features" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Targetting HPC<ul>
-<li>Double Precision - driven by HPC / simulation markets, a very big customer
-for high end GPUs.</li>
-<li>Special purpose interconnects NVLINK</li>
-</ul>
-</li>
-<li>Targetting AI<ul>
-<li>Half Precision (FP16) - driven by AI where the lower precision can be
-sufficient and can allow near double the performance.</li>
-<li>Tensor units.</li>
-</ul>
-</li>
-<li>Targetting all users (helps for graphics as well)<ul>
-<li>High bandwidth memory (HBM), fast RAM DDR5</li>
-<li>Support for shared virtual memory</li>
-</ul>
-</li>
-</ul>
-<p>In addition, NVIDIA has supported the development of various targeted libraries
-such as cuBLAS (CUDA BLAS) and cuDNN (Deep Neural Network library).
-This is a great example of the software hardware ecosystem co-evolving in order to get the best end result.</p>
-</div>
+  <div class="section" id="c">
+<h1>C#<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="../_images/cpp-graphs.png"><img alt="alternate text" class="align-center" src="../_images/cpp-graphs.png" style="width: 800px;" /></a>
 </div>
 
   <div class="section">
@@ -214,21 +173,14 @@ This is a great example of the software hardware ecosystem co-evolving in order 
   <span style="float: left;">
   
   
-  <a href="../fpgas/">
+  <a href="../gpus/">
     <i class="fa fa-arrow-circle-left"></i>
-    Field Programmable Gate Arrays (FPGAs)
+    Graphics Processing Units (GPUs)
   </a>
   
   </span>
   <span>&nbsp;</span>
   <span style="float: right;">
-  
-  
-  <a href="../csharp/">
-    C#
-    <i class="fa fa-arrow-circle-right"></i>
-  </a>
-  </span>
   
 </div>
 
