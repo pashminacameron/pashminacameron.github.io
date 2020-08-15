@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,20 +11,29 @@
   
 
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
@@ -45,25 +53,20 @@
     ul.postlist-style-circle {list-style-type: circle;}
   </style>
 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../" class="icon icon-home"> Pashmina's blog
+            <a href="../" class="icon icon-home" alt="Documentation Home"> Pashmina's blog
           
 
           
@@ -86,6 +89,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -100,6 +104,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -138,7 +143,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../">Docs</a> &raquo;</li>
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
         
       <li>Optimizing Python</li>
     
@@ -165,8 +170,8 @@
 <div class="section" id="profiling">
 <h2>Profiling<a class="headerlink" href="#profiling" title="Permalink to this headline">¶</a></h2>
 <p>In order to get a good understanding of the performance bottlenecks, one can use any of Python’s standard profiling tools, but most of them only time function calls. If the slow functions are large, then it is helpful to to get a good idea of which lines the time is being spent in. A good utility for getting line by line timing is <code class="code docutils literal notranslate"><span class="pre">line_profiler</span></code>. Use <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">line_profiler</span></code> to install it. Add an <code class="code docutils literal notranslate"><span class="pre">&#64;profile</span></code> decorator to the functions you want to profile. Then use <code class="code docutils literal notranslate"><span class="pre">kernprof</span> <span class="pre">-l</span> <span class="pre">-v</span> <span class="pre">script.py</span></code> to see results of running profiling on <code class="code docutils literal notranslate"><span class="pre">script.py</span></code>. The output will look like this:</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="gh">Line #      Hits         Time  Per Hit   % Time  Line Contents</span>
-<span class="gh">==============================================================</span>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
     19                                           @profile
     20                                           def approxMagnitude(x, y):
     21         1         13.0     13.0     65.0      small = min(x, y)
@@ -179,7 +184,7 @@
 <div class="section" id="numba">
 <h2>Numba<a class="headerlink" href="#numba" title="Permalink to this headline">¶</a></h2>
 <p>Numba is a type-specialising JIT compiler for Python, powered by LLVM. Numba uses Python byte code and type information to produce machine code using LLVM. To get the best optimization performance out of Numba, you will want to use the following options:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@numba.jit</span><span class="p">(</span><span class="s1">&#39;(float64[:, :], float64[:, :])&#39;</span><span class="p">,</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">nogil</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="s1">&#39;(float64[:, :], float64[:, :])&#39;</span><span class="p">,</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nogil</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="code docutils literal notranslate"><span class="pre">nopython=True</span></code> causes the compiler to fail hard if a numba can’t vectorize a line of code and avoids the compiler from falling back to Python silently. This is useful for making sure that all of your code is being vectorized. Often, it is possible to refactor the code slightly to allow the compiler to vectorize the code. <code class="code docutils literal notranslate"><span class="pre">nogil=True</span></code> disables the dreaded Python global interpreter lock, and this is useful for taking advantage of multi-core processors. Since Numba deals with native types, not Python pbjects, the GIL can be safely released with the usual caveats of writing good multi-threaded code (i.e. programmer manages synchronization and race conditions). <code class="code docutils literal notranslate"><span class="pre">parallel=True</span></code> enables automatic parallelization. In the current example, <code class="code docutils literal notranslate"><span class="pre">cache=True</span></code> option which enables caching of the compiled function on disk gave the same performance as <code class="code docutils literal notranslate"><span class="pre">parallel=True</span></code> and the two can’t be used together.</p>
@@ -188,13 +193,13 @@
 <p>There is also a <code class="code docutils literal notranslate"><span class="pre">&#64;cfunc</span></code> decorator that allows you to create C-compatible callbacks for Python functions. A few related things you may want to look up are <code class="code docutils literal notranslate"><span class="pre">&#64;cuda.jit</span></code> decorator and HPAT package.</p>
 <p>Advantages of using Numba over C++/SIMD:</p>
 <ul class="simple">
-<li>Ease of use, saves effort</li>
-<li>JIT can optimize across module boundaries</li>
+<li><p>Ease of use, saves effort</p></li>
+<li><p>JIT can optimize across module boundaries</p></li>
 </ul>
 <p>A few things that Numba doesn’t do are:</p>
 <ul class="simple">
-<li>String manipulations</li>
-<li>Exception handling</li>
+<li><p>String manipulations</p></li>
+<li><p>Exception handling</p></li>
 </ul>
 <p>LLVM provides a way to debug the vectorization performance of Numba. To enable this, add the following lines before the <code class="code docutils literal notranslate"><span class="pre">&#64;numba.jit</span></code> decorator.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">llvmlite.binding</span> <span class="k">as</span> <span class="nn">llvm</span>
@@ -231,51 +236,47 @@
 </div>
 <div class="section" id="analyzing-performance-of-cholesky-decomposition">
 <h2>Analyzing performance of Cholesky decomposition<a class="headerlink" href="#analyzing-performance-of-cholesky-decomposition" title="Permalink to this headline">¶</a></h2>
-<p>We chose Cholesky decomposition as the algorithm to do the comparison on because it is used in a wide variety of fields, is well understood, there are highly optimized versions of the algorithms available in every language to benchmark performance. Reasonably efficient implementations of Cholesky decomposition have been around for a while now, but <cite>efficient</cite> is a moving target in the face of ever-changing hardware baseline. This remains an active area of research <a class="footnote-reference" href="#f2" id="id1">[1]</a>.</p>
+<p>We chose Cholesky decomposition as the algorithm to do the comparison on because it is used in a wide variety of fields, is well understood, there are highly optimized versions of the algorithms available in every language to benchmark performance. Reasonably efficient implementations of Cholesky decomposition have been around for a while now, but <cite>efficient</cite> is a moving target in the face of ever-changing hardware baseline. This remains an active area of research <a class="footnote-reference brackets" href="#f2" id="id1">1</a>.</p>
 <p>We will use the <code class="code docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">L</span> <span class="pre">L^T</span></code> variant of Cholesky decomposition because this variant is cache-friendly. Using <code class="code docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">LDL*</span></code> avoids computing square roots, but includes an extra multiplication in an <code class="code docutils literal notranslate"><span class="pre">O(N^3)</span></code> loop, whereas the square root occurs in a <code class="code docutils literal notranslate"><span class="pre">O(N)</span></code> loop.</p>
 <p>We will review the following variants of the same algorithm</p>
 <ol class="arabic simple">
-<li>Python implementation</li>
-<li>NumPy implementation (uses Numpy matrices but does not use np.linalg package)</li>
-<li>Numba implementation</li>
-<li>numpy.linalg.cholesky</li>
-<li>scipy.linalg.cholesky</li>
-<li>scipy.linalg.lapack.cholesky</li>
-<li>scikit-cuda</li>
+<li><p>Python implementation</p></li>
+<li><p>NumPy implementation (uses Numpy matrices but does not use np.linalg package)</p></li>
+<li><p>Numba implementation</p></li>
+<li><p>numpy.linalg.cholesky</p></li>
+<li><p>scipy.linalg.cholesky</p></li>
+<li><p>scipy.linalg.lapack.cholesky</p></li>
+<li><p>scikit-cuda</p></li>
 </ol>
-<p>We use numpy and scipy implementations to set ourselves a target, rather than to evaluate them. The aim here is to see how far we can go from a pure Python implementation to Numba one without putting in a lot of effort or sacrificing readbility of the code <a class="footnote-reference" href="#f1" id="id2">[2]</a> .</p>
+<p>We use numpy and scipy implementations to set ourselves a target, rather than to evaluate them. The aim here is to see how far we can go from a pure Python implementation to Numba one without putting in a lot of effort or sacrificing readbility of the code <a class="footnote-reference brackets" href="#f1" id="id2">2</a> .</p>
 <a class="reference internal image-reference" href="../_images/python-graphs.png"><img alt="alternate text" class="align-center" src="../_images/python-graphs.png" style="width: 800px;" /></a>
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>If there is an optimized implementation available for your algorithm (such as scipy.linalg.lapack.cholesky), use that instead!</li>
-<li>Numba can get you pretty close to optimized algorithms with very little effort (if the algorithm lends itself to vectorization). This is useful when you want to optimize <em>your</em> code, not a standard linear algebra routine.</li>
-<li>While scikit-cuda provides a low effort route to harness the power of a GPU, a large fraction of the total time in scikit-cuda is spent in doing the data transfer to and from the GPU, so it’s worth minimizing the number of trips to the GPU and back. If it is not possible to chain operations in order to minimize the trips to GPU, then most likely you are better off sticking to scipy.linalg.lapack for standard routines. scipy.linalg.lapack seems to provide the best speed-effort tradeoff, especially at small matrix sizes.</li>
+<li><p>If there is an optimized implementation available for your algorithm (such as scipy.linalg.lapack.cholesky), use that instead!</p></li>
+<li><p>Numba can get you pretty close to optimized algorithms with very little effort (if the algorithm lends itself to vectorization). This is useful when you want to optimize <em>your</em> code, not a standard linear algebra routine.</p></li>
+<li><p>While scikit-cuda provides a low effort route to harness the power of a GPU, a large fraction of the total time in scikit-cuda is spent in doing the data transfer to and from the GPU, so it’s worth minimizing the number of trips to the GPU and back. If it is not possible to chain operations in order to minimize the trips to GPU, then most likely you are better off sticking to scipy.linalg.lapack for standard routines. scipy.linalg.lapack seems to provide the best speed-effort tradeoff, especially at small matrix sizes.</p></li>
 </ul>
 <p class="rubric">Footnotes</p>
-<table class="docutils footnote" frame="void" id="f2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Cholesky Factorization on SIMD multi-core architectures <a class="reference external" href="https://hal.archives-ouvertes.fr/hal-01550129/document">Paper</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="f1" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>If we have to sacrifice readability to such an extent that a new user cannot immediately comprehend the code, then we might as well write the code in a lower level language such as C/C++ and maximise speed gains.</td></tr>
-</tbody>
-</table>
+<dl class="footnote brackets">
+<dt class="label" id="f2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Cholesky Factorization on SIMD multi-core architectures <a class="reference external" href="https://hal.archives-ouvertes.fr/hal-01550129/document">Paper</a></p>
+</dd>
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>If we have to sacrifice readability to such an extent that a new user cannot immediately comprehend the code, then we might as well write the code in a lower level language such as C/C++ and maximise speed gains.</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://numba.pydata.org/numba-doc/dev/user/jit.html">Numba documentation</a></li>
-<li><a class="reference external" href="https://www.ibm.com/developerworks/community/blogs/jfp/entry/A_Comparison_Of_C_Julia_Python_Numba_Cython_Scipy_and_BLAS_on_LU_Factorization?lang=en">Comparison of C, Julia and Cython for LU decomposition</a></li>
-<li><a class="reference external" href="https://blog.zopa.com/2018/03/27/optimisation-algorithms-zopa-part-ii-speeding-python-numba/">Numba under the hood</a></li>
-<li><a class="reference external" href="https://devblogs.nvidia.com/numba-python-cuda-acceleration/">Mark Harris’ blog on Numba</a></li>
-<li><a class="reference external" href="https://rushter.com/blog/numba-cython-python-optimization/">Simple explanation of Numba</a></li>
-<li><a class="reference external" href="https://github.com/rkern/line_profiler">Line profiler</a></li>
+<li><p><a class="reference external" href="https://numba.pydata.org/numba-doc/dev/user/jit.html">Numba documentation</a></p></li>
+<li><p><a class="reference external" href="https://www.ibm.com/developerworks/community/blogs/jfp/entry/A_Comparison_Of_C_Julia_Python_Numba_Cython_Scipy_and_BLAS_on_LU_Factorization?lang=en">Comparison of C, Julia and Cython for LU decomposition</a></p></li>
+<li><p><a class="reference external" href="https://blog.zopa.com/2018/03/27/optimisation-algorithms-zopa-part-ii-speeding-python-numba/">Numba under the hood</a></p></li>
+<li><p><a class="reference external" href="https://devblogs.nvidia.com/numba-python-cuda-acceleration/">Mark Harris’ blog on Numba</a></p></li>
+<li><p><a class="reference external" href="https://rushter.com/blog/numba-cython-python-optimization/">Simple explanation of Numba</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rkern/line_profiler">Line profiler</a></p></li>
 </ul>
 </div>
 </div>
@@ -303,8 +304,8 @@
     Heterogenous Compute
     <i class="fa fa-arrow-circle-right"></i>
   </a>
-  </span>
   
+  </span>
 </div>
 
   
@@ -321,11 +322,19 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Pashmina Cameron.
+        
+        &copy; Copyright 2018, Pashmina Cameron
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -337,34 +346,16 @@
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="../_static/language_data.js"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

@@ -9,9 +9,6 @@ Pashmina's Blog
 **Fast code with just enough effort**
 UK RSE 2018 talk :download:`pdf <docs/RSE2018Talk.pdf>`
 
-**Fast code with just enough effort**
-UK RSE 2018 talk :download:`pdf <docs/RSE2018Talk.pdf>`. 
-
 Github repo that contains accompanying code is at `optimization_examples <https://www.github.com/pashminacameron/optimization_examples>`_.
 
 Further analysis can be found at:

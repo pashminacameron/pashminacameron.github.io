@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,20 +11,29 @@
   
 
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
@@ -45,25 +53,20 @@
     ul.postlist-style-circle {list-style-type: circle;}
   </style>
 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../" class="icon icon-home"> Pashmina's blog
+            <a href="../" class="icon icon-home" alt="Documentation Home"> Pashmina's blog
           
 
           
@@ -86,6 +89,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -100,6 +104,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -138,7 +143,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../">Docs</a> &raquo;</li>
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
         
       <li>Optimizing C++</li>
     
@@ -168,14 +173,14 @@
 <p>There are two variants of Cholesky decomposition: <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> and <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code>. We use the <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> variant here, except where outlined, to compare it to <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code> variant.</p>
 <p>We will review the following variants of the same algorithm</p>
 <ol class="arabic simple">
-<li>C++ with -O3 optimization</li>
-<li>C++ with -O3 and -ffast-math optimization</li>
-<li>C++ with BLAS (single threaded)</li>
-<li>AVX</li>
-<li>Eigen without MKL</li>
-<li>MKL LAPACK (single threaded)</li>
-<li>MKL LAPACK (multi-threaded)</li>
-<li>CUDA</li>
+<li><p>C++ with -O3 optimization</p></li>
+<li><p>C++ with -O3 and -ffast-math optimization</p></li>
+<li><p>C++ with BLAS (single threaded)</p></li>
+<li><p>AVX</p></li>
+<li><p>Eigen without MKL</p></li>
+<li><p>MKL LAPACK (single threaded)</p></li>
+<li><p>MKL LAPACK (multi-threaded)</p></li>
+<li><p>CUDA</p></li>
 </ol>
 <p>We use LAPACK, Eigen and CUDA implementations to set ourselves a target, rather than to evaluate them. The aim here is to see how far we can go from a pure C++ implementation to AVX one.</p>
 <a class="reference internal image-reference" href="../_images/cpp-graphs.png"><img alt="alternate text" class="align-center" src="../_images/cpp-graphs.png" style="width: 800px;" /></a>
@@ -183,11 +188,11 @@
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Without changing the basic Cholesky algorithm (i.e. using more efficient block-wise or recursive algorithms), SIMD instructions (AVX and higher) provide the best performance. After this point, speed gains can only be made using better algorithms. Similar perfomance may be achieved without writing SIMD intrinsics, by using <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> instead, but see <a class="reference internal" href="#compiler-opt"><span class="std std-ref">Compiler options</span></a> for a discussion of the cost involved in going down this route.</li>
-<li>Single threaded BLAS routines plugged in place of hand-written intrinsics show similar performance, suggesting that the handwritten intrinsics are optimal.</li>
-<li>Eigen is great for small fixed-size matrices. Eigen (without MKL) has efficient linear algebra algorithms. Use them where you can.</li>
-<li>LAPACK, as expected provide the best performance on CPU-only sytems. LAPACK achieves it’s performance from a combination of SIMD instructions, efficient data layout and efficient algorithms. LAPACK uses multiple threads if possible, and that can further boost performance. Similar speed gains can be made by using multiple threads for C++ or AVX code.</li>
-<li>If you have access to a GPU, CUDA gives the best performance at large matrix sizes. A large fraction of the time is spent in data transfer, so it is worth chaining operations in order to minimize the trips to/from GPU.</li>
+<li><p>Without changing the basic Cholesky algorithm (i.e. using more efficient block-wise or recursive algorithms), SIMD instructions (AVX and higher) provide the best performance. After this point, speed gains can only be made using better algorithms. Similar perfomance may be achieved without writing SIMD intrinsics, by using <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> instead, but see <a class="reference internal" href="#compiler-opt"><span class="std std-ref">Compiler options</span></a> for a discussion of the cost involved in going down this route.</p></li>
+<li><p>Single threaded BLAS routines plugged in place of hand-written intrinsics show similar performance, suggesting that the handwritten intrinsics are optimal.</p></li>
+<li><p>Eigen is great for small fixed-size matrices. Eigen (without MKL) has efficient linear algebra algorithms. Use them where you can.</p></li>
+<li><p>LAPACK, as expected provide the best performance on CPU-only sytems. LAPACK achieves it’s performance from a combination of SIMD instructions, efficient data layout and efficient algorithms. LAPACK uses multiple threads if possible, and that can further boost performance. Similar speed gains can be made by using multiple threads for C++ or AVX code.</p></li>
+<li><p>If you have access to a GPU, CUDA gives the best performance at large matrix sizes. A large fraction of the time is spent in data transfer, so it is worth chaining operations in order to minimize the trips to/from GPU.</p></li>
 </ul>
 </div>
 <div class="section" id="turbo-boost">
@@ -202,13 +207,13 @@
 <span id="compiler-opt"></span><h2>Compiler options<a class="headerlink" href="#compiler-options" title="Permalink to this headline">¶</a></h2>
 <p>Compiler options can make quite a difference in the speed (as well as size and behaviour) of the code. <code class="code docutils literal notranslate"><span class="pre">-O2</span></code> is the highest level of optimization you can request without sacrificing safety of the code. Going from <code class="code docutils literal notranslate"><span class="pre">-O2</span></code> to <code class="code docutils literal notranslate"><span class="pre">-O3</span></code> shows very little gain in speed, but adding <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> (which turns on <code class="code docutils literal notranslate"><span class="pre">-O3</span></code>)does improve the speed noticeably. However, this comes at a cost.</p>
 <a class="reference internal image-reference" href="../_images/cpp-compileroptions.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compileroptions.png" style="width: 800px;" /></a>
-<p><code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see <a class="reference internal" href="#selective-opt"><span class="std std-ref">Selective optimizations</span></a>) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler play wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see <a class="reference internal" href="#selective-opt"><span class="std std-ref">Selective optimizations</span></a>) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it.</p>
 <p>If it was possible to use <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> only at compile time and not at link time, then we could get the speedup for a single compilation unit (if we know that it is acceptable to turn on unsafe math optimizations for that part of the code) and not have any negative implications on any downstream dependencies. However, this is not currently possible with GCC (a bug report is under discussion) at the moment as <code class="docutils literal notranslate"><span class="pre">CCFLAGS</span></code> are automatically picked up by the linker when using GCC to link. Using ld to link circumvents this issue but that is <cite>hard</cite>.</p>
 <a class="reference internal image-reference" href="../_images/cpp-compileroptions-safety-speed.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compileroptions-safety-speed.png" style="width: 800px;" /></a>
 </div>
 <div class="section" id="compiler-version">
 <h2>Compiler version<a class="headerlink" href="#compiler-version" title="Permalink to this headline">¶</a></h2>
-<p>Off late, GCC has got a lot better at auto-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation:</p>
+<p>Of late, GCC has got a lot better at auto-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation:</p>
 <a class="reference internal image-reference" href="../_images/cpp-compilers-comparison.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compilers-comparison.png" style="width: 800px;" /></a>
 <p>Comparison of AVX implementations for same GCC versions:</p>
 <a class="reference internal image-reference" href="../_images/cpp-avx-compilers-comparison.png"><img alt="alternate text" class="align-center" src="../_images/cpp-avx-compilers-comparison.png" style="width: 800px;" /></a>
@@ -216,8 +221,8 @@
 <a class="reference internal image-reference" href="../_images/cpp-avx-compilers-comparison-all.png"><img alt="alternate text" class="align-center" src="../_images/cpp-avx-compilers-comparison-all.png" style="width: 800px;" /></a>
 <p>Takeaways:</p>
 <ul class="simple">
-<li>Auto-vectorization has got better, and is especially noticeable at matrix sizes between 64-256.</li>
-<li>C++ with auto-vectorization is closer to AVX from GCC 6 onwards. All C++ lines are with <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> flag. Without it, the results are worse.</li>
+<li><p>Auto-vectorization has got better, and is especially noticeable at matrix sizes between 64-256.</p></li>
+<li><p>C++ with auto-vectorization is closer to AVX from GCC 6 onwards. All C++ lines are with <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> flag. Without it, the results are worse.</p></li>
 </ul>
 </div>
 <div class="section" id="best-case-limits-for-simd">
@@ -231,7 +236,7 @@
 <p>Sometimes, you write intrinsics and you don’t get the expected speedup. In such cases, it could be that the compiler is not generating the assembly code you were hoping for. You can look at the disassembly and find out if this is the case. For example, this is the disassembly for add_avx function compiled with GCC 4.9 and GCC 5.4. GCC 5.4 unrolled the loop, whereas GCC 4.9 didn’t, hence the same code compiled with GCC 4.9 was slower.</p>
 <a class="reference internal image-reference" href="../_images/cpp-debugging-assembly.png"><img alt="alternate text" class="align-center" src="../_images/cpp-debugging-assembly.png" style="width: 800px;" /></a>
 <p>Of course, it’s always best to upgrade to a newer compiler, if you have the freedom to do so. If you can’t change the compiler, then you may want to just write the assembly yourself (rather than use intrinsics), but if you have sufficient knowledge to write the assembly, you can get away by copying the assembly from the disassembly and then modifying it to use correct registers and so on. This would allow you to bypass the compiler asm doing the wrong conversion from intrinsics to assembly.</p>
-<p>Handwritten intrinsics generally produce much more compact assembly code. Compiler’s auto-vectorized code contains a lot of no-ops and jumps. For example, the pairwise product AVX function in Cholesky example lead to 40 lines of assembly, whereas the C++ -O3 version lead to 220 lines of assembly. The more assembly there is, the harder it is to debug!</p>
+<p>Handwritten intrinsics generally produce much more compact assembly code. Compiler’s auto-vectorized code contains a lot of no-ops and jumps. For example, the pairwise product AVX function in Cholesky example lead to 40 lines of assembly, whereas the C++ -O3 version led to 220 lines of assembly. The more assembly there is, the harder it is to debug!</p>
 </div>
 <div class="section" id="selective-optimizations">
 <span id="selective-opt"></span><h2>Selective optimizations<a class="headerlink" href="#selective-optimizations" title="Permalink to this headline">¶</a></h2>
@@ -250,14 +255,14 @@ void functionToOptimize(const float * in, float * out)
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Intel intrinsics guide</a></li>
-<li><a class="reference external" href="http://www.catb.org/esr/structure-packing/">Importance of packing and alignment</a></li>
-<li><a class="reference external" href="https://www.codeproject.com/Articles/874396/Crunching-Numbers-with-AVX-and-AVX">Tutrial on AVX/AVX2</a></li>
-<li><a class="reference external" href="http://www.pointclouds.org/news/2011/08/29/ffast-math/">Note on –ffast-math</a></li>
-<li><a class="reference external" href="https://devblogs.nvidia.com/even-easier-introduction-cuda/">Mark Harris’ CUDA introduction</a></li>
-<li><a class="reference external" href="https://www.youtube.com/playlist?list=PL3MXnVUbT1wTZ7Ud-7vh7k-8x2QOiwrI8">2017 A. M. Turing award talk</a> by Dr. David Patterson &amp; Dr. John Hennessy</li>
-<li><a class="reference external" href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0348b/BABIIBBG.html">Introduction to ARM NEON intrinsics</a></li>
-<li><a class="reference external" href="http://infocenter.arm.com/help/topic/com.arm.doc.ihi0073b/IHI0073B_arm_neon_intrinsics_ref.pdf">ARM NEON intrinsics guide</a></li>
+<li><p><a class="reference external" href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Intel intrinsics guide</a></p></li>
+<li><p><a class="reference external" href="http://www.catb.org/esr/structure-packing/">Importance of packing and alignment</a></p></li>
+<li><p><a class="reference external" href="https://www.codeproject.com/Articles/874396/Crunching-Numbers-with-AVX-and-AVX">Tutrial on AVX/AVX2</a></p></li>
+<li><p><a class="reference external" href="http://www.pointclouds.org/news/2011/08/29/ffast-math/">Note on –ffast-math</a></p></li>
+<li><p><a class="reference external" href="https://devblogs.nvidia.com/even-easier-introduction-cuda/">Mark Harris’ CUDA introduction</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/playlist?list=PL3MXnVUbT1wTZ7Ud-7vh7k-8x2QOiwrI8">2017 A. M. Turing award talk</a> by Dr. David Patterson &amp; Dr. John Hennessy</p></li>
+<li><p><a class="reference external" href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0348b/BABIIBBG.html">Introduction to ARM NEON intrinsics</a></p></li>
+<li><p><a class="reference external" href="http://infocenter.arm.com/help/topic/com.arm.doc.ihi0073b/IHI0073B_arm_neon_intrinsics_ref.pdf">ARM NEON intrinsics guide</a></p></li>
 </ul>
 </div>
 </div>
@@ -279,8 +284,8 @@ void functionToOptimize(const float * in, float * out)
     Optimizing Python
     <i class="fa fa-arrow-circle-right"></i>
   </a>
-  </span>
   
+  </span>
 </div>
 
   
@@ -297,11 +302,19 @@ void functionToOptimize(const float * in, float * out)
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Pashmina Cameron.
+        
+        &copy; Copyright 2018, Pashmina Cameron
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -313,34 +326,16 @@ void functionToOptimize(const float * in, float * out)
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="../_static/language_data.js"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

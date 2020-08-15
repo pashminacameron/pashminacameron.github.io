@@ -69,7 +69,7 @@ Compiler options can make quite a difference in the speed (as well as size and b
     :align: center
     :alt: alternate text
 
-:code:`-ffast-math` essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see :ref:`selective_opt`) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler play wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the :code:`-ffast-math` code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it. 
+:code:`-ffast-math` essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see :ref:`selective_opt`) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the :code:`-ffast-math` code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it. 
 
 If it was possible to use :code:`-ffast-math` only at compile time and not at link time, then we could get the speedup for a single compilation unit (if we know that it is acceptable to turn on unsafe math optimizations for that part of the code) and not have any negative implications on any downstream dependencies. However, this is not currently possible with GCC (a bug report is under discussion) at the moment as ``CCFLAGS`` are automatically picked up by the linker when using GCC to link. Using ld to link circumvents this issue but that is `hard`.
 
@@ -82,7 +82,7 @@ If it was possible to use :code:`-ffast-math` only at compile time and not at li
 Compiler version
 *****************************
 
-Off late, GCC has got a lot better at auto-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation: 
+Of late, GCC has got a lot better at auto-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation: 
 
 .. image:: images/cpp-compilers-comparison.png
     :width: 800px
@@ -134,7 +134,7 @@ Sometimes, you write intrinsics and you don't get the expected speedup. In such 
 
 Of course, it's always best to upgrade to a newer compiler, if you have the freedom to do so. If you can't change the compiler, then you may want to just write the assembly yourself (rather than use intrinsics), but if you have sufficient knowledge to write the assembly, you can get away by copying the assembly from the disassembly and then modifying it to use correct registers and so on. This would allow you to bypass the compiler asm doing the wrong conversion from intrinsics to assembly.
 
-Handwritten intrinsics generally produce much more compact assembly code. Compiler's auto-vectorized code contains a lot of no-ops and jumps. For example, the pairwise product AVX function in Cholesky example lead to 40 lines of assembly, whereas the C++ -O3 version lead to 220 lines of assembly. The more assembly there is, the harder it is to debug!
+Handwritten intrinsics generally produce much more compact assembly code. Compiler's auto-vectorized code contains a lot of no-ops and jumps. For example, the pairwise product AVX function in Cholesky example lead to 40 lines of assembly, whereas the C++ -O3 version led to 220 lines of assembly. The more assembly there is, the harder it is to debug!
 
 .. _selective_opt:
 

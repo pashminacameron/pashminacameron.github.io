@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,20 +11,29 @@
   
 
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
@@ -45,25 +53,20 @@
     ul.postlist-style-circle {list-style-type: circle;}
   </style>
 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../" class="icon icon-home"> Pashmina's blog
+            <a href="../" class="icon icon-home" alt="Documentation Home"> Pashmina's blog
           
 
           
@@ -86,6 +89,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -100,6 +104,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -138,7 +143,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../">Docs</a> &raquo;</li>
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
         
       <li>Heterogenous Compute</li>
     
@@ -167,9 +172,9 @@ constant - so each transistor uses less power), the focus of computer
 architecture has moved towards Heterogenous computing.</p>
 <p>A good overview of computer architecture in general and this topic in particular may be found in:</p>
 <ul class="simple">
-<li>Computer Architecture: A Quantative Approach (John Hennesy, David Patterson)
-<a class="reference external" href="https://www.amazon.co.uk/Computer-Architecture-Quantitative-Approach-Kaufmann/dp/012383872X">Amazon</a></li>
-<li>John Hennesy and David Patterson 2017 ACM Turing Award Lecture <a class="reference external" href="https://www.youtube.com/watch?v=3LVeEjsn8Ts">YouTube video</a></li>
+<li><p>Computer Architecture: A Quantative Approach (John Hennesy, David Patterson)
+<a class="reference external" href="https://www.amazon.co.uk/Computer-Architecture-Quantitative-Approach-Kaufmann/dp/012383872X">Amazon</a></p></li>
+<li><p>John Hennesy and David Patterson 2017 ACM Turing Award Lecture <a class="reference external" href="https://www.youtube.com/watch?v=3LVeEjsn8Ts">YouTube video</a></p></li>
 </ul>
 <div class="section" id="what-is-heterogenous-compute">
 <h2>What is heterogenous compute?<a class="headerlink" href="#what-is-heterogenous-compute" title="Permalink to this headline">¶</a></h2>
@@ -179,21 +184,21 @@ more special purpose devices that are optimized for particular types of
 algorithm.</p>
 <p>This includes:</p>
 <ul class="simple">
-<li><strong>CPUs</strong> - It may seem obvious but the thing that makes these approaches
+<li><p><strong>CPUs</strong> - It may seem obvious but the thing that makes these approaches
 heterogenous is that we have a mixture of different compute devices.
 The highest performance systems make use of the CPU for what it is best
-at in conjunction with more specialist devices.</li>
-<li><a class="reference internal" href="../gpus/#gpu-label"><span class="std std-ref">GPUs</span></a> - Modern Graphics Processors have features specifically to enable
-/ enhance their use for non graphics, i.e. compute tasks.</li>
-<li><a class="reference internal" href="../DSPs/"><span class="doc">DSPs</span></a> - A class of general purpose CPUs with very different characteristics
-from a CPU.  These are especially suited for stream processing.</li>
-<li><a class="reference internal" href="../fpgas/"><span class="doc">FPGAs</span></a> - Flexible devices that let you implement almost any hardware design
+at in conjunction with more specialist devices.</p></li>
+<li><p><a class="reference internal" href="../gpus/#gpu-label"><span class="std std-ref">GPUs</span></a> - Modern Graphics Processors have features specifically to enable
+/ enhance their use for non graphics, i.e. compute tasks.</p></li>
+<li><p><a class="reference internal" href="../DSPs/"><span class="doc">DSPs</span></a> - A class of general purpose CPUs with very different characteristics
+from a CPU.  These are especially suited for stream processing.</p></li>
+<li><p><a class="reference internal" href="../fpgas/"><span class="doc">FPGAs</span></a> - Flexible devices that let you implement almost any hardware design
 you want.  This is often the path to a <em>cheap</em> or <em>on demand</em> domain
-specific accelerator.</li>
-<li><a class="reference internal" href="../DomainSpecificArchitectures/"><span class="doc">Domain Specific Architectures (DSAs)</span></a> - These can still have a high degree of
+specific accelerator.</p></li>
+<li><p><a class="reference internal" href="../DomainSpecificArchitectures/"><span class="doc">Domain Specific Architectures (DSAs)</span></a> - These can still have a high degree of
 programability but they are designed to take on
 one class of problems.  GPUs started as domain specific processors but have evolved to
-handle a wide range of applications, putting them in a class of their own.</li>
+handle a wide range of applications, putting them in a class of their own.</p></li>
 </ul>
 <p>This section is not intended to be a complete description of any of these
 large areas, but rather a brief introduction to point you in the right
@@ -205,12 +210,12 @@ direction.</p>
 devices.  An extreme example is the recently announced
 <a class="reference external" href="https://developer.nvidia.com/embedded/buy/jetson-xavier-devkit">NVIDIA Xavier SoC</a></p>
 <ul class="simple">
-<li>8 Core CPU</li>
-<li>8 SM Volta GPU</li>
-<li>Deep learning accelerator</li>
-<li>Programable vision accelerator (vector processing unit)</li>
-<li>Stereo and optic flow engine</li>
-<li>Image/signal processor</li>
+<li><p>8 Core CPU</p></li>
+<li><p>8 SM Volta GPU</p></li>
+<li><p>Deep learning accelerator</p></li>
+<li><p>Programable vision accelerator (vector processing unit)</p></li>
+<li><p>Stereo and optic flow engine</p></li>
+<li><p>Image/signal processor</p></li>
 </ul>
 </div>
 <div class="section" id="general-resources">
@@ -220,17 +225,17 @@ on hardware accelerators.</p>
 <div class="section" id="websites">
 <h3>Websites<a class="headerlink" href="#websites" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><a class="reference external" href="http://www.nextplatform.com">http://www.nextplatform.com</a> : A website focused on HPC and large scale
+<li><p><a class="reference external" href="http://www.nextplatform.com">http://www.nextplatform.com</a> : A website focused on HPC and large scale
 computing.  As heteregenous computing forms a large part of high end HPC,
-this is often a good place to follow upcoming trends.</li>
+this is often a good place to follow upcoming trends.</p></li>
 </ul>
 </div>
 <div class="section" id="conferences">
 <h3>Conferences<a class="headerlink" href="#conferences" title="Permalink to this headline">¶</a></h3>
 <p>Computer architecture conferences:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://www.hotchips.com">http://www.hotchips.com</a> : Mainly industry presentations.</li>
-<li><a class="reference external" href="http://www.isca.com">http://www.isca.com</a> : A conference with a more academic focus.</li>
+<li><p><a class="reference external" href="http://www.hotchips.com">http://www.hotchips.com</a> : Mainly industry presentations.</p></li>
+<li><p><a class="reference external" href="http://www.isca.com">http://www.isca.com</a> : A conference with a more academic focus.</p></li>
 </ul>
 </div>
 </div>
@@ -259,8 +264,8 @@ this is often a good place to follow upcoming trends.</li>
     Digital Signal Processors (DSPs)
     <i class="fa fa-arrow-circle-right"></i>
   </a>
-  </span>
   
+  </span>
 </div>
 
   
@@ -277,11 +282,19 @@ this is often a good place to follow upcoming trends.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Pashmina Cameron.
+        
+        &copy; Copyright 2018, Pashmina Cameron
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -293,34 +306,16 @@ this is often a good place to follow upcoming trends.</li>
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="../_static/language_data.js"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

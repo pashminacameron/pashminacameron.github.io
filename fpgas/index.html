@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,20 +11,29 @@
   
 
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
@@ -45,25 +53,20 @@
     ul.postlist-style-circle {list-style-type: circle;}
   </style>
 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../" class="icon icon-home"> Pashmina's blog
+            <a href="../" class="icon icon-home" alt="Documentation Home"> Pashmina's blog
           
 
           
@@ -86,6 +89,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -100,6 +104,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -138,7 +143,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../">Docs</a> &raquo;</li>
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
         
       <li>Field Programmable Gate Arrays (FPGAs)</li>
     
@@ -169,8 +174,8 @@ across the pipeline and massive amounts of controlled parallelism.</p>
 <p>There are two major manufacturers of FPGAs who are both focussing heavily
 on their usage as compute accelerators:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://www.xilinx.com">Xilinx</a></li>
-<li><a class="reference external" href="http://www.altera.com">Altera</a> (now part of Intel)</li>
+<li><p><a class="reference external" href="http://www.xilinx.com">Xilinx</a></p></li>
+<li><p><a class="reference external" href="http://www.altera.com">Altera</a> (now part of Intel)</p></li>
 </ul>
 <p>As you will see much of the following divides into the different approaches
 each of these players has taken.</p>
@@ -178,18 +183,18 @@ each of these players has taken.</p>
 <h2>What can you do with an FPGA?<a class="headerlink" href="#what-can-you-do-with-an-fpga" title="Permalink to this headline">¶</a></h2>
 <p>Modern FPGAs are a mixture of</p>
 <ul class="simple">
-<li>Hard IP (not reprogrammable): which are somewhat general purpose components, such as memory or arithmetic units</li>
-<li>Soft IP (reprogrammable): such as Logic Gate arrays in which you can implement general digital circuits</li>
+<li><p>Hard IP (not reprogrammable): which are somewhat general purpose components, such as memory or arithmetic units</p></li>
+<li><p>Soft IP (reprogrammable): such as Logic Gate arrays in which you can implement general digital circuits</p></li>
 </ul>
 <p>This combination allows for much better speed, space and power efficiency.</p>
 <p>The main advantages over Domain Specific Architectures are:</p>
 <ul class="simple">
-<li>Enabling compute on demand as the cost of the FPGA hardware can be shared by
+<li><p>Enabling compute on demand as the cost of the FPGA hardware can be shared by
 a large number of different applications.  Hence we get the rapid scale up
-options in the cloud that we are used to for CPU instances.</li>
-<li>Flexiblity as your requirements change.  This leads to very fast turn around.
+options in the cloud that we are used to for CPU instances.</p></li>
+<li><p>Flexiblity as your requirements change.  This leads to very fast turn around.
 FPGAs are suited for approaches such as agile development that are not
-possible when timescales to do make a new chip are involved. Simply reprogramming the FPGA is sufficient.</li>
+possible when timescales to do make a new chip are involved. Simply reprogramming the FPGA is sufficient.</p></li>
 </ul>
 </div>
 <div class="section" id="programming-an-fpga">
@@ -209,13 +214,13 @@ familiar with.</p>
 hardware description that is programmed to the FPGA:</p>
 <p><strong>Altera</strong></p>
 <ul class="simple">
-<li><a class="reference external" href="https://www.intel.com/content/www/us/en/software/programmable/sdk-for-opencl/overview.html">OpenCL SDK</a></li>
-<li><a class="reference external" href="https://www.bu.edu/caadlab/HEART18a.pdf">FPGA HPC using OpenCL: Case Study in 3D FFT</a> - Ahmed Sanaullah and Martin Herbordt</li>
+<li><p><a class="reference external" href="https://www.intel.com/content/www/us/en/software/programmable/sdk-for-opencl/overview.html">OpenCL SDK</a></p></li>
+<li><p><a class="reference external" href="https://www.bu.edu/caadlab/HEART18a.pdf">FPGA HPC using OpenCL: Case Study in 3D FFT</a> - Ahmed Sanaullah and Martin Herbordt</p></li>
 </ul>
 <p><strong>Xilinx</strong></p>
 <ul class="simple">
-<li><a class="reference external" href="https://www.xilinx.com/products/design-tools/software-zone/sdaccel.html">SDAccel</a></li>
-<li><a class="reference external" href="https://link.springer.com/article/10.1007/s11227-018-2367-9">Simultaneous multiprocessing in a software-defined heterogeneous FPGA</a> - Jose Nunez-Yanez et l.</li>
+<li><p><a class="reference external" href="https://www.xilinx.com/products/design-tools/software-zone/sdaccel.html">SDAccel</a></p></li>
+<li><p><a class="reference external" href="https://link.springer.com/article/10.1007/s11227-018-2367-9">Simultaneous multiprocessing in a software-defined heterogeneous FPGA</a> - Jose Nunez-Yanez et l.</p></li>
 </ul>
 </div>
 </div>
@@ -247,9 +252,9 @@ allow for coherent caches with the CPUs, greatly accelerating some types of appl
 <div class="section" id="example-systems-usecases">
 <h3>Example Systems / Usecases<a class="headerlink" href="#example-systems-usecases" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><a class="reference external" href="https://www.microsoft.com/en-us/research/project/project-catapult/">Project Catapult - Microsoft</a></li>
-<li><a class="reference external" href="https://www.microsoft.com/en-us/research/uploads/prod/2018/06/ISCA18-Brainwave-CameraReady.pdf">Project Brainwave - Microsoft</a></li>
-<li><a class="reference external" href="https://www.xilinx.com/products/design-tools/cloud-based-acceleration.html">List of Xilinx Based Cloud Server Offerings</a> includes Alibaba, Amazon, Baidu, Huawei, Nimbix and Tencent</li>
+<li><p><a class="reference external" href="https://www.microsoft.com/en-us/research/project/project-catapult/">Project Catapult - Microsoft</a></p></li>
+<li><p><a class="reference external" href="https://www.microsoft.com/en-us/research/uploads/prod/2018/06/ISCA18-Brainwave-CameraReady.pdf">Project Brainwave - Microsoft</a></p></li>
+<li><p><a class="reference external" href="https://www.xilinx.com/products/design-tools/cloud-based-acceleration.html">List of Xilinx Based Cloud Server Offerings</a> includes Alibaba, Amazon, Baidu, Huawei, Nimbix and Tencent</p></li>
 </ul>
 </div>
 </div>
@@ -278,8 +283,8 @@ allow for coherent caches with the CPUs, greatly accelerating some types of appl
     Graphics Processing Units (GPUs)
     <i class="fa fa-arrow-circle-right"></i>
   </a>
-  </span>
   
+  </span>
 </div>
 
   
@@ -296,11 +301,19 @@ allow for coherent caches with the CPUs, greatly accelerating some types of appl
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Pashmina Cameron.
+        
+        &copy; Copyright 2018, Pashmina Cameron
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -312,34 +325,16 @@ allow for coherent caches with the CPUs, greatly accelerating some types of appl
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="../_static/language_data.js"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

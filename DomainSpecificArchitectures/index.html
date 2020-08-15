@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,20 +11,29 @@
   
 
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
@@ -45,25 +53,20 @@
     ul.postlist-style-circle {list-style-type: circle;}
   </style>
 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
-            <a href="../" class="icon icon-home"> Pashmina's blog
+            <a href="../" class="icon icon-home" alt="Documentation Home"> Pashmina's blog
           
 
           
@@ -86,6 +89,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -100,6 +104,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -138,7 +143,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../">Docs</a> &raquo;</li>
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
         
       <li>Domain Specific Architectures (DSAs)</li>
     
@@ -165,36 +170,36 @@
 technique - designing hardware targeted at that one application.
 Examples of this include:</p>
 <ul class="simple">
-<li>Cryptography accelerators</li>
-<li>Compression gngines</li>
-<li>Block chain hashers</li>
-<li>Neural networks</li>
+<li><p>Cryptography accelerators</p></li>
+<li><p>Compression gngines</p></li>
+<li><p>Block chain hashers</p></li>
+<li><p>Neural networks</p></li>
 </ul>
 <p>In reality, many DSAs are targeting fast moving application areas, and as
 such a trade off is made between fixed purpose hardware and some level of
 programablility.  However, these devices are still not suited for totally
 general purpose usage like A CPU. Devices in this category include</p>
 <ul class="simple">
-<li>Network switch processors.  This is a big area with a lot of interesting
+<li><p>Network switch processors.  This is a big area with a lot of interesting
 architecture, but in most cases they are not suitable for accelerating
-workloads not closely coupled to network routing / filtering.</li>
-<li><a class="reference external" href="https://www.nextplatform.com/2018/08/30/intels-exascale-dataflow-engine-drops-x86-and-von-neuman/">Intel’s Exascale Dataflow engine</a> (hard to tell how domain specific this is yet)</li>
-<li>Vector processors such as Nec SX-Aurora.</li>
+workloads not closely coupled to network routing / filtering.</p></li>
+<li><p><a class="reference external" href="https://www.nextplatform.com/2018/08/30/intels-exascale-dataflow-engine-drops-x86-and-von-neuman/">Intel’s Exascale Dataflow engine</a> (hard to tell how domain specific this is yet)</p></li>
+<li><p>Vector processors such as Nec SX-Aurora.</p></li>
 </ul>
 <p>A particularly big growth area for DSA is around neural networks:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://www.graphcore.ai/">Graphcore’s AI processor</a></li>
-<li><a class="reference external" href="https://cloud.google.com/tpu/">Google TPU</a> - Detailed description in Hennesy and Patterson.</li>
-<li><a class="reference external" href="https://developer.arm.com/products/processors/machine-learning/arm-ml-processor">ARM ML processors</a></li>
-<li><a class="reference external" href="https://www.nextplatform.com/2018/08/23/a-mythic-approach-to-deep-learning-inference/">Mythic</a> - An unsual hardware approach doing inference in the analog domain.</li>
+<li><p><a class="reference external" href="https://www.graphcore.ai/">Graphcore’s AI processor</a></p></li>
+<li><p><a class="reference external" href="https://cloud.google.com/tpu/">Google TPU</a> - Detailed description in Hennesy and Patterson.</p></li>
+<li><p><a class="reference external" href="https://developer.arm.com/products/processors/machine-learning/arm-ml-processor">ARM ML processors</a></p></li>
+<li><p><a class="reference external" href="https://www.nextplatform.com/2018/08/23/a-mythic-approach-to-deep-learning-inference/">Mythic</a> - An unsual hardware approach doing inference in the analog domain.</p></li>
 </ul>
 <p>Many other NN accelerators are under development or already on the market, see Wikipedia <a class="reference external" href="https://en.wikipedia.org/wiki/AI_accelerator">AI accelerator</a></p>
 <p>Another big area is image processing DSAs which have been around for a long
 time.  Recent progress has been towards making them more programable and
 flexible.</p>
 <ul class="simple">
-<li><a class="reference external" href="https://www.blog.google/products/pixel/pixel-visual-core-image-processing-and-machine-learning-pixel-2/">Google Visual Core</a>.</li>
-<li>Most mobile SoCs have some level of programmable image processor.</li>
+<li><p><a class="reference external" href="https://www.blog.google/products/pixel/pixel-visual-core-image-processing-and-machine-learning-pixel-2/">Google Visual Core</a>.</p></li>
+<li><p>Most mobile SoCs have some level of programmable image processor.</p></li>
 </ul>
 <div class="section" id="programming-dsas">
 <h2>Programming DSAs<a class="headerlink" href="#programming-dsas" title="Permalink to this headline">¶</a></h2>
@@ -229,8 +234,8 @@ Tensorflow for Google’s TPU.</p>
     Field Programmable Gate Arrays (FPGAs)
     <i class="fa fa-arrow-circle-right"></i>
   </a>
-  </span>
   
+  </span>
 </div>
 
   
@@ -247,11 +252,19 @@ Tensorflow for Google’s TPU.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Pashmina Cameron.
+        
+        &copy; Copyright 2018, Pashmina Cameron
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -263,34 +276,16 @@ Tensorflow for Google’s TPU.</p>
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="../_static/language_data.js"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

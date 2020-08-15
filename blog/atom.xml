@@ -2,20 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Pashmina Cameron's blog</title>
   <id>True/blog/atom.xml</id>
-  <updated>2018-10-04T00:00:00Z</updated>
+  <updated>2018-08-30T00:00:00Z</updated>
   <link href="True" />
   <link href="True/blog/atom.xml" rel="self" />
-  <generator uri="http://ablog.readthedocs.org" version="0.9.2">ABlog</generator>
-  <entry xml:base="True/blog/atom.xml">
-    <title type="text">C#</title>
-    <id>True/csharp/</id>
-    <updated>2018-10-04T00:00:00Z</updated>
-    <published>2018-10-04T00:00:00Z</published>
-    <link href="True/csharp/" />
-    <author>
-      <name>Pashmina Cameron</name>
-    </author>
-  </entry>
+  <generator uri="https://ablog.readthedocs.org" version="0.10.6">ABlog</generator>
   <entry xml:base="True/blog/atom.xml">
     <title type="text">Graphics Processing Units (GPUs)</title>
     <id>True/gpus/</id>
@@ -83,7 +73,7 @@ of accelerator.&lt;/p&gt;
     <author>
       <name>Pashmina Cameron</name>
     </author>
-    <content type="html">&lt;p&gt;As we reach the end of Moore’s law (CPU performance doubles every 2 years) and
+    <content type="html">&lt;p&gt;As we reach the end of Mooreâ€™s law (CPU performance doubles every 2 years) and
 Dennard scaling (as transistors get smaller their power density remains
 constant - so each transistor uses less power), the focus of computer
 architecture has moved towards Heterogenous computing.&lt;/p&gt;
