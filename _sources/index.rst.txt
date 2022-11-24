@@ -40,4 +40,6 @@ In future, we may look at
 .. toctree::
    :hidden:
 
+   cpp.rst
+   python.rst
    about.rst

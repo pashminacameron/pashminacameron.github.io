@@ -21,7 +21,7 @@ I did a PhD in computer vision from University of Cambridge on a `Gates Cambridg
 
 `Google Scholar <https://scholar.google.com/citations?user=_0HLsowAAAAJ&amp;hl=en>`_ | `LinkedIn <https://www.linkedin.com/in/pashmina-cameron-7424b51/>`_ | Twitter: @CameronPashmina 
 
-Some of the work I do is best expressed as code.  
+Code: 
 
 - `Introduction to Autograd <https://rseconuk2019.sched.com/event/QSS6/5c1-tools-and-case-studies-autograd-a-cool-software-trick-for-avoiding-maths>`_, Research Software Engineers Conference UK 2019
 - `Fast code with just enough effort <https://github.com/pashminacameron/documents/blob/master/RSE2018Talk.pdf>`_, Research Software Engineers Conference UK 2018
