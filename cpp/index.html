@@ -1,83 +1,70 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Optimizing C++ &mdash; Pashmina&#39;s blog  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
-    <link rel="search" title="Search" href="../search/" />
-   
-  
-  <link rel="alternate" type="application/atom+xml"  href="../blog/atom.xml" title="Pashmina Cameron's blog">
-  
-  
-  <link href="True" rel="stylesheet">
-  
-  <style type="text/css">
-    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
-    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
-    ul.postlist a {font-style: italic;}
-    ul.postlist-style-disc {list-style-type: disc;}
-    ul.postlist-style-none {list-style-type: none;}
-    ul.postlist-style-circle {list-style-type: circle;}
-  </style>
+    <link rel="search" title="Search" href="../search/" />   
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../blog/atom.xml"
+  title="Pashmina Cameron's blog"
+/>
+ 
+<link href="True" rel="stylesheet" />
+
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../" class="icon icon-home" alt="Documentation Home"> Pashmina's blog
-          
-
-          
+            <a href="../" class="icon icon-home"> Pashmina's blog
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -85,91 +72,40 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about/">About Pashmina Cameron</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../">Pashmina's blog</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Optimizing C++</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../_sources/cpp.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="optimizing-c">
-<h1>Optimizing C++<a class="headerlink" href="#optimizing-c" title="Permalink to this headline">¶</a></h1>
+              <section id="optimizing-c">
+<h1>Optimizing C++<a class="headerlink" href="#optimizing-c" title="Permalink to this heading"></a></h1>
 <p>Discussion on Cholesky decomposition in C++</p>
 <p>We used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which we outline where they exist. All code used in these examples is available at <a class="reference external" href="https://www.github.com/pashminacameron/optimization_examples">optimization_examples</a> Github repo. For CUDA, we used the shipped NVIDIA examples, modified to use single precision floats for consistency.</p>
-<div class="section" id="algorithm-choice">
-<h2>Algorithm choice<a class="headerlink" href="#algorithm-choice" title="Permalink to this headline">¶</a></h2>
+<section id="algorithm-choice">
+<h2>Algorithm choice<a class="headerlink" href="#algorithm-choice" title="Permalink to this heading"></a></h2>
 <p>There are two variants of Cholesky decomposition: <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> and <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code>. We use the <code class="code docutils literal notranslate"><span class="pre">LL^T</span></code> variant here, except where outlined, to compare it to <code class="code docutils literal notranslate"><span class="pre">LDL^T</span></code> variant.</p>
 <p>We will review the following variants of the same algorithm</p>
 <ol class="arabic simple">
@@ -184,9 +120,9 @@
 </ol>
 <p>We use LAPACK, Eigen and CUDA implementations to set ourselves a target, rather than to evaluate them. The aim here is to see how far we can go from a pure C++ implementation to AVX one.</p>
 <a class="reference internal image-reference" href="../_images/cpp-graphs.png"><img alt="alternate text" class="align-center" src="../_images/cpp-graphs.png" style="width: 800px;" /></a>
-</div>
-<div class="section" id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Without changing the basic Cholesky algorithm (i.e. using more efficient block-wise or recursive algorithms), SIMD instructions (AVX and higher) provide the best performance. After this point, speed gains can only be made using better algorithms. Similar perfomance may be achieved without writing SIMD intrinsics, by using <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> instead, but see <a class="reference internal" href="#compiler-opt"><span class="std std-ref">Compiler options</span></a> for a discussion of the cost involved in going down this route.</p></li>
 <li><p>Single threaded BLAS routines plugged in place of hand-written intrinsics show similar performance, suggesting that the handwritten intrinsics are optimal.</p></li>
@@ -194,26 +130,26 @@
 <li><p>LAPACK, as expected provide the best performance on CPU-only sytems. LAPACK achieves it’s performance from a combination of SIMD instructions, efficient data layout and efficient algorithms. LAPACK uses multiple threads if possible, and that can further boost performance. Similar speed gains can be made by using multiple threads for C++ or AVX code.</p></li>
 <li><p>If you have access to a GPU, CUDA gives the best performance at large matrix sizes. A large fraction of the time is spent in data transfer, so it is worth chaining operations in order to minimize the trips to/from GPU.</p></li>
 </ul>
-</div>
-<div class="section" id="turbo-boost">
-<h2>Turbo Boost<a class="headerlink" href="#turbo-boost" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="turbo-boost">
+<h2>Turbo Boost<a class="headerlink" href="#turbo-boost" title="Permalink to this heading"></a></h2>
 <p>Turbo Boost was disabled by following instructions <a class="reference external" href="https://www.tautvidas.com/blog/2011/04/disabling-intel-turbo-boost/">here</a>. With Turbo Boost enabled  (which is the default), timings are not consistent because the CPU clock frequency changes (as per temperature of the machine). Anaconda uses Intel MKL and I have not tested this on an ARM processor. All timings were taken in Ubuntu 18.04 (Windows Subsystem for Linux). To verify that Turbo Boost is off, you may find it useful to download Intel extreme tuning utility and check that the Max Core Frequency stays roughly constant when running benchmarks.</p>
-</div>
-<div class="section" id="numactl">
-<h2>numactl<a class="headerlink" href="#numactl" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="numactl">
+<h2>numactl<a class="headerlink" href="#numactl" title="Permalink to this heading"></a></h2>
 <p>Intel MKL uses as many threads as there are physical cores on a machine by default. This behaviour can be controlled by setting <code class="code docutils literal notranslate"><span class="pre">MKL_NUM_THREADS</span></code> or <code class="code docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code>, read by MKL in that order, or by tying down the process to specific cores on a machine. <code class="code docutils literal notranslate"><span class="pre">numactl</span></code> allows you to do the latter. Use <code class="code docutils literal notranslate"><span class="pre">numactl</span> <span class="pre">-C</span> <span class="pre">0</span> <span class="pre">./testCholesky</span></code> to run the process on a single core, (only core 0 is accessible on WSL), and then use <code class="code docutils literal notranslate"><span class="pre">top</span></code> to verify that this is happening. WSL apparently only uses a single core, but I did manage to see 200% CPU usage without any of the above measures (for a machine with 2 physical cores).</p>
-</div>
-<div class="section" id="compiler-options">
-<span id="compiler-opt"></span><h2>Compiler options<a class="headerlink" href="#compiler-options" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="compiler-options">
+<span id="compiler-opt"></span><h2>Compiler options<a class="headerlink" href="#compiler-options" title="Permalink to this heading"></a></h2>
 <p>Compiler options can make quite a difference in the speed (as well as size and behaviour) of the code. <code class="code docutils literal notranslate"><span class="pre">-O2</span></code> is the highest level of optimization you can request without sacrificing safety of the code. Going from <code class="code docutils literal notranslate"><span class="pre">-O2</span></code> to <code class="code docutils literal notranslate"><span class="pre">-O3</span></code> shows very little gain in speed, but adding <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> (which turns on <code class="code docutils literal notranslate"><span class="pre">-O3</span></code>)does improve the speed noticeably. However, this comes at a cost.</p>
 <a class="reference internal image-reference" href="../_images/cpp-compileroptions.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compileroptions.png" style="width: 800px;" /></a>
-<p><code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see <a class="reference internal" href="#selective-opt"><span class="std std-ref">Selective optimizations</span></a>) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> essentially turns on unsafe math optimizations and the changes due to this compiler option can propagate to the code that may link against your code in future (see Note of -ffast-math in References). While this option does make your code faster, it is very important that you understand the implications of turning it on and if possible, mitigate against it. A safer option that gives similar performance is to use either function-specific optimization (see <a class="reference internal" href="#selective-opt"><span class="std std-ref">Selective optimizations</span></a>) or write some intrinsics or assembly to optimize just the bottlenecks rather than letting the compiler play wreak havoc on all of your code (and your downstream dependencies). We see from the graph below that AVX code performs better than the <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> code and is also safer. This is definitely a case in which the effort of writing SIMD intrinsics is  worth it.</p>
 <p>If it was possible to use <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> only at compile time and not at link time, then we could get the speedup for a single compilation unit (if we know that it is acceptable to turn on unsafe math optimizations for that part of the code) and not have any negative implications on any downstream dependencies. However, this is not currently possible with GCC (a bug report is under discussion) at the moment as <code class="docutils literal notranslate"><span class="pre">CCFLAGS</span></code> are automatically picked up by the linker when using GCC to link. Using ld to link circumvents this issue but that is <cite>hard</cite>.</p>
 <a class="reference internal image-reference" href="../_images/cpp-compileroptions-safety-speed.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compileroptions-safety-speed.png" style="width: 800px;" /></a>
-</div>
-<div class="section" id="compiler-version">
-<h2>Compiler version<a class="headerlink" href="#compiler-version" title="Permalink to this headline">¶</a></h2>
-<p>Of late, GCC has got a lot better at auto-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation:</p>
+</section>
+<section id="compiler-version">
+<h2>Compiler version<a class="headerlink" href="#compiler-version" title="Permalink to this heading"></a></h2>
+<p>Off late, GCC has got a lot better at auto-vectorisation. Comparison of GCC versions 4.8, 5.5, 6.4 and 7.3 for C++ implementation:</p>
 <a class="reference internal image-reference" href="../_images/cpp-compilers-comparison.png"><img alt="alternate text" class="align-center" src="../_images/cpp-compilers-comparison.png" style="width: 800px;" /></a>
 <p>Comparison of AVX implementations for same GCC versions:</p>
 <a class="reference internal image-reference" href="../_images/cpp-avx-compilers-comparison.png"><img alt="alternate text" class="align-center" src="../_images/cpp-avx-compilers-comparison.png" style="width: 800px;" /></a>
@@ -224,36 +160,36 @@
 <li><p>Auto-vectorization has got better, and is especially noticeable at matrix sizes between 64-256.</p></li>
 <li><p>C++ with auto-vectorization is closer to AVX from GCC 6 onwards. All C++ lines are with <code class="code docutils literal notranslate"><span class="pre">-ffast-math</span></code> flag. Without it, the results are worse.</p></li>
 </ul>
-</div>
-<div class="section" id="best-case-limits-for-simd">
-<h2>Best case limits for SIMD<a class="headerlink" href="#best-case-limits-for-simd" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="best-case-limits-for-simd">
+<h2>Best case limits for SIMD<a class="headerlink" href="#best-case-limits-for-simd" title="Permalink to this heading"></a></h2>
 <p>Both Intel and ARM provide information on latency and throughput of each of their SIMD instructions. See for example, here, a screenshot of the Intel intrinsics guide.</p>
 <a class="reference internal image-reference" href="../_images/cpp-assemblyguide.png"><img alt="alternate text" class="align-center" src="../_images/cpp-assemblyguide.png" style="width: 800px;" /></a>
 <p>Looking these numbers up is a good way to choose between instructions and also determine whether or not it is worth coding up an intrinsics/assembly version of your code. For example, if the instruction you need is not available, and you have to use multiple instructions to get your work done, it may not actually speed up your code. You may have to redesign your algorithm.</p>
-</div>
-<div class="section" id="debugging-auto-generated-assembly">
-<h2>Debugging auto generated assembly<a class="headerlink" href="#debugging-auto-generated-assembly" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="debugging-auto-generated-assembly">
+<h2>Debugging auto generated assembly<a class="headerlink" href="#debugging-auto-generated-assembly" title="Permalink to this heading"></a></h2>
 <p>Sometimes, you write intrinsics and you don’t get the expected speedup. In such cases, it could be that the compiler is not generating the assembly code you were hoping for. You can look at the disassembly and find out if this is the case. For example, this is the disassembly for add_avx function compiled with GCC 4.9 and GCC 5.4. GCC 5.4 unrolled the loop, whereas GCC 4.9 didn’t, hence the same code compiled with GCC 4.9 was slower.</p>
 <a class="reference internal image-reference" href="../_images/cpp-debugging-assembly.png"><img alt="alternate text" class="align-center" src="../_images/cpp-debugging-assembly.png" style="width: 800px;" /></a>
 <p>Of course, it’s always best to upgrade to a newer compiler, if you have the freedom to do so. If you can’t change the compiler, then you may want to just write the assembly yourself (rather than use intrinsics), but if you have sufficient knowledge to write the assembly, you can get away by copying the assembly from the disassembly and then modifying it to use correct registers and so on. This would allow you to bypass the compiler asm doing the wrong conversion from intrinsics to assembly.</p>
-<p>Handwritten intrinsics generally produce much more compact assembly code. Compiler’s auto-vectorized code contains a lot of no-ops and jumps. For example, the pairwise product AVX function in Cholesky example lead to 40 lines of assembly, whereas the C++ -O3 version led to 220 lines of assembly. The more assembly there is, the harder it is to debug!</p>
-</div>
-<div class="section" id="selective-optimizations">
-<span id="selective-opt"></span><h2>Selective optimizations<a class="headerlink" href="#selective-optimizations" title="Permalink to this headline">¶</a></h2>
+<p>Handwritten intrinsics generally produce much more compact assembly code. Compiler’s auto-vectorized code contains a lot of no-ops and jumps. For example, the pairwise product AVX function in Cholesky example lead to 40 lines of assembly, whereas the C++ -O3 version lead to 220 lines of assembly. The more assembly there is, the harder it is to debug!</p>
+</section>
+<section id="selective-optimizations">
+<span id="selective-opt"></span><h2>Selective optimizations<a class="headerlink" href="#selective-optimizations" title="Permalink to this heading"></a></h2>
 <p>GCC provides a <code class="code docutils literal notranslate"><span class="pre">pragma</span></code> to selectively optimize a function, i.e. change the compiler flags for a single function at a time. The compile string does not show the actual flags used as those are only printed on a per file basis when calling cmake or make. These flags are, therefore invisible, and hence a little dangerous, but the option is there, should you want to change compiler flags for selected functions. A better way of doing this may be to move code that needs to be optimized to a separate file and changing the compiler flags for just that file. That way the flags will be available for inspection (while allowing the benefit of optimization without polluting other compilation units).</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>#pragma GCC push_options
-#pragma GCC optimize (&quot;-ffast-math&quot;)
-void functionToOptimize(const float * in, float * out)
-{
-      ...
-}
-#pragma GCC pop_options
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="c1">#pragma GCC push_options</span><span class="w"></span>
+<span class="c1">#pragma GCC optimize (&quot;-ffast-math&quot;)</span><span class="w"></span>
+<span class="nb nb-Type">void</span><span class="w"> </span><span class="n">functionToOptimize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="ow">in</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">out</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="o">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="c1">#pragma GCC pop_options</span><span class="w"></span>
 </pre></div>
 </div>
 <p>WSL does not report the existance of AVX2 and a few other variants of Intel instruction sets via <code class="code docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/proc/cpuinfo</span></code>, so you would need to check the Intel processor specifications to determine whether a particular instruction set is available.</p>
-</div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Intel intrinsics guide</a></p></li>
 <li><p><a class="reference external" href="http://www.catb.org/esr/structure-packing/">Importance of packing and alignment</a></p></li>
@@ -264,78 +200,56 @@ void functionToOptimize(const float * in, float * out)
 <li><p><a class="reference external" href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0348b/BABIIBBG.html">Introduction to ARM NEON intrinsics</a></p></li>
 <li><p><a class="reference external" href="http://infocenter.arm.com/help/topic/com.arm.doc.ihi0073b/IHI0073B_arm_neon_intrinsics_ref.pdf">ARM NEON intrinsics guide</a></p></li>
 </ul>
-</div>
-</div>
-
-  <div class="section">
-  
-    
-
+</section>
+</section>
 
 <div class="section">
-  <span style="float: left;">
-  
+    
+
+<div class="section">
+  <span style="float: left">
+    
   </span>
   <span>&nbsp;</span>
-  <span style="float: right;">
-  
-  
-  <a href="../python/">
-    Optimizing Python
-    <i class="fa fa-arrow-circle-right"></i>
-  </a>
-  
+  <span style="float: right">
+     
+    <a href="../python/">
+      Optimizing Python <i
+        class="fa fa-arrow-circle-right"
+      ></i
+      >
+    </a>
+    
   </span>
 </div>
-
   
-  
-  </div>
+</div>
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2018, Pashmina Cameron
-
-    </p>
+    <p>&#169; Copyright 2018, Pashmina Cameron.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

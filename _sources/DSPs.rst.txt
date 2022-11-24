@@ -26,10 +26,7 @@ There are specialist forms of DSP for individual markets:
 However, DSP elements are most frequently found inside SoCs or as hard
 IP with an FPGA. See also:
 
-* Qualcomm's SnapDragon mobile processors to provide AI services. 
-`Qualcomm Neural Processing SDK <https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk>`_
-
-* Visual Processing for automotive applications. 
-`Cadence VisionC5 <https://www.cadence.com/content/cadence-www/global/en_US/home/company/newsroom/press-releases/pr/2017/cadence-unveils-industrys-first-neural-network-dsp-ip-for-automo.html>`_
+* Qualcomm's SnapDragon mobile processors to provide AI services `Qualcomm Neural Processing SDK <https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk>`_
+* Visual Processing for automotive applications `Cadence VisionC5 <https://www.cadence.com/content/cadence-www/global/en_US/home/company/newsroom/press-releases/pr/2017/cadence-unveils-industrys-first-neural-network-dsp-ip-for-automo.html>`_
 
 

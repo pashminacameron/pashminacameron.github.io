@@ -28,6 +28,10 @@ In order to get a good understanding of the performance bottlenecks, one can use
 
 After profiling it's worth thinking about whether the time is spent in places you expect it to be spent, i.e. at the heart of your computation. If not, then some simple refactoring could speed the code up. It's also worth thinking about data layout and cache friendliness at this point. 
 
+.. update:: 2019
+
+    `py-spy <https://github.com/benfred/py-spy>`_ is another very good Python profiler; it runs non-intrusively, does not require any code modifications and can profile subprocesses and native code. 
+
 *************
 Numba
 *************
