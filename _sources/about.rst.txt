@@ -10,7 +10,7 @@ Previously, at Microsoft Research Cambridge, I worked on a number of projects in
 
 - `Project HSD <https://www.microsoft.com/en-us/research/project/hsd/>`_, an optical storage system which uses machine learning for storing data in holographic crystals with high powered lasers
 - `Project Silica <https://www.microsoft.com/en-us/research/project/project-silica/>`_, a sustainable optical storage system which uses machine learning for storing data in glass with high speed lasers
-- `Generative Chemistry <https://www.microsoft.com/en-us/research/project/generative-chemistry/>`_, a workflow containing generative models for predicting new drug molecules and multi-property optimization [`Paper <https://openreview.net/pdf?id=ZTsoE8G3GG>`_, `Code <https://github.com/microsoft/molecule-generation>`_], now used in-house by Novartis [`Video <https://www.youtube.com/watch?v=74ZD68ZWd34>`_]
+- `Generative Chemistry <https://www.microsoft.com/en-us/research/project/generative-chemistry/>`_, a workflow containing generative models for predicting new drug molecules and multi-property optimization, now used in-house by Novartis [`Video <https://www.youtube.com/watch?v=74ZD68ZWd34>`_]
 - `Human motion modelling <https://www.microsoft.com/en-us/research/publication/flag-flow-based-3d-avatar-generation-from-sparse-observations/>`_, a system for predicting avatar human motion from sparse head mounted device signals [`Web <https://microsoft.github.io/flag/>`_] 
 
 I also co-ran the MSR Cambridge AI Residency program for three years and managed teams of various sizes. 
@@ -19,7 +19,7 @@ Before joining Microsoft Research Cambridge in 2018, I led a computer vision R&D
 
 I did a PhD in computer vision from University of Cambridge on a `Gates Cambridge Scholarship <https://www.gatescambridge.org/>`_. In a previous life, I built commercial foreign exchange software at Integral which is still being used full-steam today.
 
-`Google Scholar <https://scholar.google.com/citations?user=_0HLsowAAAAJ&amp;hl=en>`_ | `LinkedIn <https://www.linkedin.com/in/pashmina-cameron-7424b51/>`_ | Twitter: @CameronPashmina 
+`Google Scholar <https://scholar.google.com/citations?user=_0HLsowAAAAJ&amp;hl=en>`_ | `LinkedIn <https://www.linkedin.com/in/pashmina-cameron-7424b51/>`_ | Email: pashabhi@yahoo.com 
 
 Code: 
 

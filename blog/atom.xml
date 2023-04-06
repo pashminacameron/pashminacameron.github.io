@@ -2,99 +2,29 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>True</id>
   <title>Pashmina Cameron's blog</title>
-  <updated>2022-11-24T15:29:31.391114+00:00</updated>
+  <updated>2023-04-06T11:25:45.260905+00:00</updated>
   <link href="True"/>
   <link href="True/blog/atom.xml" rel="self"/>
-  <generator uri="https://ablog.readthedocs.org/" version="0.10.29">ABlog</generator>
+  <generator uri="https://ablog.readthedocs.io/" version="0.11.2">ABlog</generator>
   <entry>
-    <id>True/cpp/</id>
-    <title>Optimizing C++</title>
-    <updated>2018-07-29T00:00:00+01:00</updated>
-    <author>
-      <name>Pashmina Cameron</name>
-    </author>
-    <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
-&lt;p&gt;Discussion on Cholesky decomposition in C++&lt;/p&gt;
-&lt;/div&gt;
-</content>
-    <link href="True/cpp/" rel="alternate"/>
-    <summary>Discussion on Cholesky decomposition in C++</summary>
-    <category term="atag" label="atag"/>
-    <published>2018-07-29T00:00:00+01:00</published>
-  </entry>
-  <entry>
-    <id>True/python/</id>
-    <title>Optimizing Python</title>
-    <updated>2019-10-20T00:00:00+01:00</updated>
-    <author>
-      <name>Pashmina Cameron</name>
-    </author>
-    <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
-&lt;p&gt;Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at &lt;a class="reference external" href="https://www.github.com/pashminacameron/optimization_examples"&gt;optimization_examples&lt;/a&gt; Github repo. For scikit-cuda, we used the example code from the documentation.&lt;/p&gt;
-&lt;/div&gt;
-</content>
-    <link href="True/python/" rel="alternate"/>
-    <summary>Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at optimization_examples Github repo. For scikit-cuda, we used the example code from the documentation.</summary>
-    <category term="atag" label="atag"/>
-    <published>2018-07-29T00:00:00+01:00</published>
-  </entry>
-  <entry>
-    <id>True/heterogenous/</id>
-    <title>Heterogenous Compute</title>
-    <updated>2018-08-29T00:00:00+01:00</updated>
-    <author>
-      <name>Pashmina Cameron</name>
-    </author>
-    <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
-&lt;p&gt;As we reach the end of Moore’s law (CPU performance doubles every 2 years) and
-Dennard scaling (as transistors get smaller their power density remains
-constant - so each transistor uses less power), the focus of computer
-architecture has moved towards Heterogenous computing.&lt;/p&gt;
-&lt;/div&gt;
-</content>
-    <link href="True/heterogenous/" rel="alternate"/>
-    <summary>As we reach the end of Moore’s law (CPU performance doubles every 2 years) and
-Dennard scaling (as transistors get smaller their power density remains
-constant - so each transistor uses less power), the focus of computer
-architecture has moved towards Heterogenous computing.</summary>
-    <category term="Hardware" label="Hardware"/>
-    <published>2018-08-29T00:00:00+01:00</published>
-  </entry>
-  <entry>
-    <id>True/DSPs/</id>
-    <title>Digital Signal Processors (DSPs)</title>
+    <id>True/gpus/</id>
+    <title>Graphics Processing Units (GPUs)</title>
     <updated>2018-08-30T00:00:00+01:00</updated>
     <author>
       <name>Pashmina Cameron</name>
     </author>
     <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
-&lt;p&gt;Whilst DSPs are mostly found in mobile platforms, they are an important form
-of accelerator.&lt;/p&gt;
+&lt;p&gt;Graphics processing units were one of the earliest forms of accelerator put
+to general purpose use.  Initially this was entirely done by using / missusing
+the graphics processing pipelines. This limited what could be done and lead
+to some very creative algorithms (and incredibly capable programmers) to make progress under these limitations.&lt;/p&gt;
 &lt;/div&gt;
 </content>
-    <link href="True/DSPs/" rel="alternate"/>
-    <summary>Whilst DSPs are mostly found in mobile platforms, they are an important form
-of accelerator.</summary>
-    <category term="Hardware" label="Hardware"/>
-    <published>2018-08-30T00:00:00+01:00</published>
-  </entry>
-  <entry>
-    <id>True/DomainSpecificArchitectures/</id>
-    <title>Domain Specific Architectures (DSAs)</title>
-    <updated>2018-08-30T00:00:00+01:00</updated>
-    <author>
-      <name>Pashmina Cameron</name>
-    </author>
-    <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
-&lt;p&gt;Certain applications have sufficient demand to lead to the ultimate optmization
-technique - designing hardware targeted at that one application.
-Examples of this include:&lt;/p&gt;
-&lt;/div&gt;
-</content>
-    <link href="True/DomainSpecificArchitectures/" rel="alternate"/>
-    <summary>Certain applications have sufficient demand to lead to the ultimate optmization
-technique - designing hardware targeted at that one application.
-Examples of this include:</summary>
+    <link href="True/gpus/" rel="alternate"/>
+    <summary>Graphics processing units were one of the earliest forms of accelerator put
+to general purpose use.  Initially this was entirely done by using / missusing
+the graphics processing pipelines. This limited what could be done and lead
+to some very creative algorithms (and incredibly capable programmers) to make progress under these limitations.</summary>
     <category term="Hardware" label="Hardware"/>
     <published>2018-08-30T00:00:00+01:00</published>
   </entry>
@@ -123,25 +53,95 @@ across the pipeline and massive amounts of controlled parallelism.</summary>
     <published>2018-08-30T00:00:00+01:00</published>
   </entry>
   <entry>
-    <id>True/gpus/</id>
-    <title>Graphics Processing Units (GPUs)</title>
+    <id>True/DomainSpecificArchitectures/</id>
+    <title>Domain Specific Architectures (DSAs)</title>
     <updated>2018-08-30T00:00:00+01:00</updated>
     <author>
       <name>Pashmina Cameron</name>
     </author>
     <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
-&lt;p&gt;Graphics processing units were one of the earliest forms of accelerator put
-to general purpose use.  Initially this was entirely done by using / missusing
-the graphics processing pipelines. This limited what could be done and lead
-to some very creative algorithms (and incredibly capable programmers) to make progress under these limitations.&lt;/p&gt;
+&lt;p&gt;Certain applications have sufficient demand to lead to the ultimate optmization
+technique - designing hardware targeted at that one application.
+Examples of this include:&lt;/p&gt;
 &lt;/div&gt;
 </content>
-    <link href="True/gpus/" rel="alternate"/>
-    <summary>Graphics processing units were one of the earliest forms of accelerator put
-to general purpose use.  Initially this was entirely done by using / missusing
-the graphics processing pipelines. This limited what could be done and lead
-to some very creative algorithms (and incredibly capable programmers) to make progress under these limitations.</summary>
+    <link href="True/DomainSpecificArchitectures/" rel="alternate"/>
+    <summary>Certain applications have sufficient demand to lead to the ultimate optmization
+technique - designing hardware targeted at that one application.
+Examples of this include:</summary>
     <category term="Hardware" label="Hardware"/>
     <published>2018-08-30T00:00:00+01:00</published>
+  </entry>
+  <entry>
+    <id>True/DSPs/</id>
+    <title>Digital Signal Processors (DSPs)</title>
+    <updated>2018-08-30T00:00:00+01:00</updated>
+    <author>
+      <name>Pashmina Cameron</name>
+    </author>
+    <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
+&lt;p&gt;Whilst DSPs are mostly found in mobile platforms, they are an important form
+of accelerator.&lt;/p&gt;
+&lt;/div&gt;
+</content>
+    <link href="True/DSPs/" rel="alternate"/>
+    <summary>Whilst DSPs are mostly found in mobile platforms, they are an important form
+of accelerator.</summary>
+    <category term="Hardware" label="Hardware"/>
+    <published>2018-08-30T00:00:00+01:00</published>
+  </entry>
+  <entry>
+    <id>True/heterogenous/</id>
+    <title>Heterogenous Compute</title>
+    <updated>2018-08-29T00:00:00+01:00</updated>
+    <author>
+      <name>Pashmina Cameron</name>
+    </author>
+    <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
+&lt;p&gt;As we reach the end of Moore’s law (CPU performance doubles every 2 years) and
+Dennard scaling (as transistors get smaller their power density remains
+constant - so each transistor uses less power), the focus of computer
+architecture has moved towards Heterogenous computing.&lt;/p&gt;
+&lt;/div&gt;
+</content>
+    <link href="True/heterogenous/" rel="alternate"/>
+    <summary>As we reach the end of Moore’s law (CPU performance doubles every 2 years) and
+Dennard scaling (as transistors get smaller their power density remains
+constant - so each transistor uses less power), the focus of computer
+architecture has moved towards Heterogenous computing.</summary>
+    <category term="Hardware" label="Hardware"/>
+    <published>2018-08-29T00:00:00+01:00</published>
+  </entry>
+  <entry>
+    <id>True/python/</id>
+    <title>Optimizing Python</title>
+    <updated>2019-04-06T00:00:00+01:00</updated>
+    <author>
+      <name>Pashmina Cameron</name>
+    </author>
+    <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
+&lt;p&gt;Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at &lt;a class="reference external" href="https://www.github.com/pashminacameron/optimization_examples"&gt;optimization_examples&lt;/a&gt; Github repo. For scikit-cuda, we used the example code from the documentation.&lt;/p&gt;
+&lt;/div&gt;
+</content>
+    <link href="True/python/" rel="alternate"/>
+    <summary>Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at optimization_examples Github repo. For scikit-cuda, we used the example code from the documentation.</summary>
+    <category term="atag" label="atag"/>
+    <published>2018-07-29T00:00:00+01:00</published>
+  </entry>
+  <entry>
+    <id>True/cpp/</id>
+    <title>Optimizing C++</title>
+    <updated>2018-07-29T00:00:00+01:00</updated>
+    <author>
+      <name>Pashmina Cameron</name>
+    </author>
+    <content type="html">&lt;div class="ablog-post-excerpt docutils container"&gt;
+&lt;p&gt;Discussion on Cholesky decomposition in C++&lt;/p&gt;
+&lt;/div&gt;
+</content>
+    <link href="True/cpp/" rel="alternate"/>
+    <summary>Discussion on Cholesky decomposition in C++</summary>
+    <category term="atag" label="atag"/>
+    <published>2018-07-29T00:00:00+01:00</published>
   </entry>
 </feed>

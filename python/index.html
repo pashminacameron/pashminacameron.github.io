@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Optimizing Python &mdash; Pashmina&#39;s blog  documentation</title>
@@ -13,9 +13,6 @@
   <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -23,40 +20,19 @@
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
     <link rel="next" title="About Pashmina Cameron" href="../about/" />
-    <link rel="prev" title="Optimizing C++" href="../cpp/" />   
+    <link rel="prev" title="Optimizing C++" href="../cpp/" />
+ 
+
 <link
   rel="alternate"
   type="application/atom+xml"
   href="../blog/atom.xml"
   title="Pashmina Cameron's blog"
 />
- 
-<link href="True" rel="stylesheet" />
 
-<style type="text/css">
-  ul.ablog-archive {
-    list-style: none;
-    overflow: auto;
-    margin-left: 0px;
-  }
-  ul.ablog-archive li {
-    float: left;
-    margin-right: 5px;
-    font-size: 80%;
-  }
-  ul.postlist a {
-    font-style: italic;
-  }
-  ul.postlist-style-disc {
-    list-style-type: disc;
-  }
-  ul.postlist-style-none {
-    list-style-type: none;
-  }
-  ul.postlist-style-circle {
-    list-style-type: circle;
-  }
-</style>
+
+<link href="True" rel="stylesheet"/>
+
 
 </head>
 
@@ -65,11 +41,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../" class="icon icon-home"> Pashmina's blog
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Pashmina's blog
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -101,8 +81,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
-      <li>Optimizing Python</li>
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Optimizing Python</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/python.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -111,7 +91,8 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-              <section id="optimizing-python">
+             
+<section id="optimizing-python">
 <h1>Optimizing Python<a class="headerlink" href="#optimizing-python" title="Permalink to this heading"></a></h1>
 <p>Benchmarks were taken on an Intel Xeon E5 processor (Windows 10). Intallation instructions refer to Windows environment as well, but they are pretty similar for Linux. This has been tested on Linux and WSL as well. We used Python 3.6 distribution from Anaconda (which includes MKL). All LAPACK and BLAS references are references BLAS and LAPACK from Intel MKL, included in Anaconda. All code used in these examples is available at <a class="reference external" href="https://www.github.com/pashminacameron/optimization_examples">optimization_examples</a> Github repo. For scikit-cuda, we used the example code from the documentation.</p>
 <section id="profiling">
@@ -128,7 +109,7 @@
 </div>
 <p>After profiling it’s worth thinking about whether the time is spent in places you expect it to be spent, i.e. at the heart of your computation. If not, then some simple refactoring could speed the code up. It’s also worth thinking about data layout and cache friendliness at this point.</p>
 <div class="note update admonition">
-<p class="admonition-title">Updated on 20 October 2019</p>
+<p class="admonition-title">Updated on 06 April 2019</p>
 <p><a class="reference external" href="https://github.com/benfred/py-spy">py-spy</a> is another very good Python profiler; it runs non-intrusively, does not require any code modifications and can profile subprocesses and native code.</p>
 </div>
 </section>
@@ -187,7 +168,7 @@
 </section>
 <section id="analyzing-performance-of-cholesky-decomposition">
 <h2>Analyzing performance of Cholesky decomposition<a class="headerlink" href="#analyzing-performance-of-cholesky-decomposition" title="Permalink to this heading"></a></h2>
-<p>We chose Cholesky decomposition as the algorithm to do the comparison on because it is used in a wide variety of fields, is well understood, there are highly optimized versions of the algorithms available in every language to benchmark performance. Reasonably efficient implementations of Cholesky decomposition have been around for a while now, but <cite>efficient</cite> is a moving target in the face of ever-changing hardware baseline. This remains an active area of research <a class="footnote-reference brackets" href="#f2" id="id1">1</a>.</p>
+<p>We chose Cholesky decomposition as the algorithm to do the comparison on because it is used in a wide variety of fields, is well understood, there are highly optimized versions of the algorithms available in every language to benchmark performance. Reasonably efficient implementations of Cholesky decomposition have been around for a while now, but <cite>efficient</cite> is a moving target in the face of ever-changing hardware baseline. This remains an active area of research <a class="footnote-reference brackets" href="#f2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
 <p>We will use the <code class="code docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">L</span> <span class="pre">L^T</span></code> variant of Cholesky decomposition because this variant is cache-friendly. Using <code class="code docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">LDL*</span></code> avoids computing square roots, but includes an extra multiplication in an <code class="code docutils literal notranslate"><span class="pre">O(N^3)</span></code> loop, whereas the square root occurs in a <code class="code docutils literal notranslate"><span class="pre">O(N)</span></code> loop.</p>
 <p>We will review the following variants of the same algorithm</p>
 <ol class="arabic simple">
@@ -199,7 +180,7 @@
 <li><p>scipy.linalg.lapack.cholesky</p></li>
 <li><p>scikit-cuda</p></li>
 </ol>
-<p>We use numpy and scipy implementations to set ourselves a target, rather than to evaluate them. The aim here is to see how far we can go from a pure Python implementation to Numba one without putting in a lot of effort or sacrificing readbility of the code <a class="footnote-reference brackets" href="#f1" id="id2">2</a> .</p>
+<p>We use numpy and scipy implementations to set ourselves a target, rather than to evaluate them. The aim here is to see how far we can go from a pure Python implementation to Numba one without putting in a lot of effort or sacrificing readbility of the code <a class="footnote-reference brackets" href="#f1" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> .</p>
 <a class="reference internal image-reference" href="../_images/python-graphs.png"><img alt="alternate text" class="align-center" src="../_images/python-graphs.png" style="width: 800px;" /></a>
 </section>
 <section id="conclusion">
@@ -210,14 +191,16 @@
 <li><p>While scikit-cuda provides a low effort route to harness the power of a GPU, a large fraction of the total time in scikit-cuda is spent in doing the data transfer to and from the GPU, so it’s worth minimizing the number of trips to the GPU and back. If it is not possible to chain operations in order to minimize the trips to GPU, then most likely you are better off sticking to scipy.linalg.lapack for standard routines. scipy.linalg.lapack seems to provide the best speed-effort tradeoff, especially at small matrix sizes.</p></li>
 </ul>
 <p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="f2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Cholesky Factorization on SIMD multi-core architectures <a class="reference external" href="https://hal.archives-ouvertes.fr/hal-01550129/document">Paper</a></p>
-</dd>
-<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>If we have to sacrifice readability to such an extent that a new user cannot immediately comprehend the code, then we might as well write the code in a lower level language such as C/C++ and maximise speed gains.</p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Cholesky Factorization on SIMD multi-core architectures <a class="reference external" href="https://hal.archives-ouvertes.fr/hal-01550129/document">Paper</a></p>
+</aside>
+<aside class="footnote brackets" id="f1" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>If we have to sacrifice readability to such an extent that a new user cannot immediately comprehend the code, then we might as well write the code in a lower level language such as C/C++ and maximise speed gains.</p>
+</aside>
+</aside>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
@@ -232,29 +215,38 @@
 </section>
 </section>
 
-<div class="section">
-    
+<div class="section ablog__blog_comments">
+  
+  
 
-<div class="section">
-  <span style="float: left">
-     
+
+<div class="section ablog__prev-next">
+  <span class="ablog__prev">
+    
+    
     <a href="../cpp/">
-      <i class="fa fa-arrow-circle-left"></i> Optimizing C++
+      
+      <i class="fa fa-arrow-circle-left"></i>
+      
+      <span>Optimizing C++</span>
     </a>
     
   </span>
-  <span>&nbsp;</span>
-  <span style="float: right">
-     
+  <span class="ablog__spacer">&nbsp;</span>
+  <span class="ablog__next">
+    
+    
     <a href="../heterogenous/">
-      Heterogenous Compute <i
-        class="fa fa-arrow-circle-right"
-      ></i
-      >
+      <span>Heterogenous Compute</span>
+      
+      <i class="fa fa-arrow-circle-right" ></i>
+      
     </a>
     
   </span>
 </div>
+
+  
   
 </div>
 

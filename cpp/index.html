@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Optimizing C++ &mdash; Pashmina&#39;s blog  documentation</title>
@@ -13,9 +13,6 @@
   <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -23,40 +20,19 @@
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
     <link rel="next" title="Optimizing Python" href="../python/" />
-    <link rel="prev" title="Pashmina’s Blog" href="../" />   
+    <link rel="prev" title="Pashmina’s Blog" href="../" />
+ 
+
 <link
   rel="alternate"
   type="application/atom+xml"
   href="../blog/atom.xml"
   title="Pashmina Cameron's blog"
 />
- 
-<link href="True" rel="stylesheet" />
 
-<style type="text/css">
-  ul.ablog-archive {
-    list-style: none;
-    overflow: auto;
-    margin-left: 0px;
-  }
-  ul.ablog-archive li {
-    float: left;
-    margin-right: 5px;
-    font-size: 80%;
-  }
-  ul.postlist a {
-    font-style: italic;
-  }
-  ul.postlist-style-disc {
-    list-style-type: disc;
-  }
-  ul.postlist-style-none {
-    list-style-type: none;
-  }
-  ul.postlist-style-circle {
-    list-style-type: circle;
-  }
-</style>
+
+<link href="True" rel="stylesheet"/>
+
 
 </head>
 
@@ -65,11 +41,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../" class="icon icon-home"> Pashmina's blog
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Pashmina's blog
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -106,8 +86,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
-      <li>Optimizing C++</li>
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Optimizing C++</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/cpp.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -116,7 +96,8 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-              <section id="optimizing-c">
+             
+<section id="optimizing-c">
 <h1>Optimizing C++<a class="headerlink" href="#optimizing-c" title="Permalink to this heading"></a></h1>
 <p>Discussion on Cholesky decomposition in C++</p>
 <p>We used Windows Subsystem of Linux (WSL) to do the benchmarking. There are some differences with respect to pure Linux machines, which we outline where they exist. All code used in these examples is available at <a class="reference external" href="https://www.github.com/pashminacameron/optimization_examples">optimization_examples</a> Github repo. For CUDA, we used the shipped NVIDIA examples, modified to use single precision floats for consistency.</p>
@@ -193,13 +174,13 @@
 <section id="selective-optimizations">
 <span id="selective-opt"></span><h2>Selective optimizations<a class="headerlink" href="#selective-optimizations" title="Permalink to this heading"></a></h2>
 <p>GCC provides a <code class="code docutils literal notranslate"><span class="pre">pragma</span></code> to selectively optimize a function, i.e. change the compiler flags for a single function at a time. The compile string does not show the actual flags used as those are only printed on a per file basis when calling cmake or make. These flags are, therefore invisible, and hence a little dangerous, but the option is there, should you want to change compiler flags for selected functions. A better way of doing this may be to move code that needs to be optimized to a separate file and changing the compiler flags for just that file. That way the flags will be available for inspection (while allowing the benefit of optimization without polluting other compilation units).</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="c1">#pragma GCC push_options</span><span class="w"></span>
-<span class="c1">#pragma GCC optimize (&quot;-ffast-math&quot;)</span><span class="w"></span>
-<span class="nb nb-Type">void</span><span class="w"> </span><span class="n">functionToOptimize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="ow">in</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">out</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="o">...</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="c1">#pragma GCC pop_options</span><span class="w"></span>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="c1">#pragma GCC push_options</span>
+<span class="c1">#pragma GCC optimize (&quot;-ffast-math&quot;)</span>
+<span class="nb nb-Type">void</span><span class="w"> </span><span class="n">functionToOptimize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="ow">in</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">out</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">      </span><span class="o">...</span>
+<span class="p">}</span>
+<span class="c1">#pragma GCC pop_options</span>
 </pre></div>
 </div>
 <p>WSL does not report the existance of AVX2 and a few other variants of Intel instruction sets via <code class="code docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/proc/cpuinfo</span></code>, so you would need to check the Intel processor specifications to determine whether a particular instruction set is available.</p>
@@ -219,25 +200,30 @@
 </section>
 </section>
 
-<div class="section">
-    
+<div class="section ablog__blog_comments">
+  
+  
 
-<div class="section">
-  <span style="float: left">
+
+<div class="section ablog__prev-next">
+  <span class="ablog__prev">
     
   </span>
-  <span>&nbsp;</span>
-  <span style="float: right">
-     
+  <span class="ablog__spacer">&nbsp;</span>
+  <span class="ablog__next">
+    
+    
     <a href="../python/">
-      Optimizing Python <i
-        class="fa fa-arrow-circle-right"
-      ></i
-      >
+      <span>Optimizing Python</span>
+      
+      <i class="fa fa-arrow-circle-right" ></i>
+      
     </a>
     
   </span>
 </div>
+
+  
   
 </div>
 
