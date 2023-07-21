@@ -109,13 +109,13 @@
 </div>
 <p>After profiling it’s worth thinking about whether the time is spent in places you expect it to be spent, i.e. at the heart of your computation. If not, then some simple refactoring could speed the code up. It’s also worth thinking about data layout and cache friendliness at this point.</p>
 <div class="note update admonition">
-<p class="admonition-title">Updated on 06 April 2019</p>
+<p class="admonition-title">Updated on 21 July 2019</p>
 <p><a class="reference external" href="https://github.com/benfred/py-spy">py-spy</a> is another very good Python profiler; it runs non-intrusively, does not require any code modifications and can profile subprocesses and native code.</p>
 </div>
 </section>
 <section id="numba">
 <h2>Numba<a class="headerlink" href="#numba" title="Permalink to this heading"></a></h2>
-<p>Numba is a type-specialising JIT compiler for Python, powered by LLVM. Numba uses Python byte code and type information to produce machine code using LLVM. To get the best optimization performance out of Numba, you will want to use the following options:</p>
+<p>Numba is a type-specialising, just-in-time, function compiler for Python, powered by LLVM. Numba uses Python byte code and type information to produce machine code using LLVM. To get the best optimization performance out of Numba, you will want to use the following options:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="s1">&#39;(float64[:, :], float64[:, :])&#39;</span><span class="p">,</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nogil</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>

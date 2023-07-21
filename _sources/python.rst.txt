@@ -36,7 +36,7 @@ After profiling it's worth thinking about whether the time is spent in places yo
 Numba
 *************
 
-Numba is a type-specialising JIT compiler for Python, powered by LLVM. Numba uses Python byte code and type information to produce machine code using LLVM. To get the best optimization performance out of Numba, you will want to use the following options: 
+Numba is a type-specialising, just-in-time, function compiler for Python, powered by LLVM. Numba uses Python byte code and type information to produce machine code using LLVM. To get the best optimization performance out of Numba, you will want to use the following options: 
 
 .. code-block:: python
 

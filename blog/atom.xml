@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>True</id>
   <title>Pashmina Cameron's blog</title>
-  <updated>2023-04-06T11:25:45.260905+00:00</updated>
+  <updated>2023-07-21T13:50:57.156503+00:00</updated>
   <link href="True"/>
   <link href="True/blog/atom.xml" rel="self"/>
   <generator uri="https://ablog.readthedocs.io/" version="0.11.2">ABlog</generator>
@@ -115,7 +115,7 @@ architecture has moved towards Heterogenous computing.</summary>
   <entry>
     <id>True/python/</id>
     <title>Optimizing Python</title>
-    <updated>2019-04-06T00:00:00+01:00</updated>
+    <updated>2019-07-21T00:00:00+01:00</updated>
     <author>
       <name>Pashmina Cameron</name>
     </author>
